@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            /* Shared styles */
+            body {
+                font-family: Helvetica, sans-serif;
+                font-size: 16px;
+                color: #34302e;
+                margin: 0.25in;
+            }
+            @page {
+                size: letter portrait;
+                margin: 0.25in;
+            }
+            .name {
+                font-size: 18px;
+                font-family: Helvetica, sans-serif;
+                font-weight: normal;
+                margin: 0 0 10px 0;
+            }
+            .categories {
+                color: #605D5D;
+                font-size: 14px;
+                font-family: Helvetica, sans-serif;
+                font-style: italic;
+            }
+            .rating {
+                color: #d10505;
+                font-size: 14px;
+            }
+            .metadata {
+                font-size: 14px;
+            }
+            .infobox p {
+                margin: 0;
+                line-height: 150%;
+            }
+            .subhead {
+                color: #d10505;
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+                margin: 10px 0;
+            }
+            
+            .ingredients p {
+                margin: 4px 0;
+            }
+            /* To prevent nutrition/directions from getting too close
+               to ingredients */
+            .ingredients {
+                padding-bottom: 10px;
+            }
+            .clear {
+                clear:both;
+            }
+            a {
+                color: #4990E2;
+                text-decoration: none;
+            }
+            /* Full page specific styles */
+            .text {
+                line-height: 130%;
+            }
+            .photobox {
+                float: left;
+                margin-right: 14px;
+                            }
+            .photo {
+                max-width: 140px;
+                max-height: 140px;
+                width: auto;
+                height: auto;
+            }
+            .inline-image {
+                max-width: 25%;
+                max-height: 25%;
+                width: auto;
+                height: auto;
+            }
+            .photoswipe {
+                border: 1px #dddddd solid;
+                cursor: pointer;
+            }
+            .pswp__caption__center {
+                text-align: center !important;
+            }
+            .recipe {
+                page-break-after: always;
+                            }
+            .recipe:first-child {
+                border-top: 0 none;
+                margin-top: 0;
+                padding-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Recipe -->
+<div class="recipe" itemscope itemtype="http://schema.org/Recipe" >
+    
+    <div class="infobox">
+
+        <!-- Image -->
+
+        <!-- Name -->
+        <h1 itemprop="name" class="name">Tom yum soup</h1>
+        
+        <!-- Info -->
+        
+        <!-- Rating, categories -->
+        <p itemprop="aggregateRating" class="rating" value="0"></p>
+            <p itemprop="recipeCategory" class="categories">Dinner, Seafood, Thai</p>
+        
+        <p class="metadata">
+        
+            <!-- Cook time, prep time, servings, difficulty -->
+
+            <!-- Source -->
+
+        </p>
+        
+        <div class="clear"></div>
+
+    </div>
+    
+    <div class="left-column">
+
+        <!-- Ingredients -->
+        <div class="ingredientsbox">
+            <h3 class="subhead">Ingredients</h3>
+            <div class="ingredients text">
+                <p class="line" itemprop="recipeIngredient"><strong>600</strong>ml vegetable stock</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> stick of lemongrass (can use dried if can&apos;t get fresh)</p><p class="line" itemprop="recipeIngredient"><strong>6</strong> lime leaves</p><p class="line" itemprop="recipeIngredient"><strong>6</strong> ripe cherry tomatoes</p><p class="line" itemprop="recipeIngredient"><strong>5</strong>cm piece of galangal (can sub with ginger)</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> fresh green bird’s-eye chilli</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> teaspoon palm sugar</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tablespoon fish sauce</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> clove of garlic</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> shallot</p><p class="line" itemprop="recipeIngredient"><strong>6</strong> raw peeled kings prawns</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> large oyster mushrooms (can sub with any mushroom)</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> lime</p>
+            </div>
+        </div>
+        
+        <!-- Nutrition (in two-column mode it goes below the ingredients) -->
+
+    </div>
+    
+    <div class="right-column">
+    
+    <!-- Description -->
+
+    <!-- Directions -->
+    <div class="directionsbox">
+        <h3 class="subhead">Directions</h3>
+        <div itemprop="recipeInstructions" class="directions text">
+            <p class="line">1) Bring the stock to a boil. </p><p class="line">2) Bash the lemongrass, rip the lime leaves, halve the tomatoes, and add to the stock with the galangal, chilli, palm sugar and fish sauce.</p><p class="line">3) Mince the garlic and dice the shallot, then add to the stock. Leave the soup to simmer gently for at least 20 minutes.</p><p class="line">4) Add the prawns and tear in the oyster mushrooms. Squeeze in the juice of the lime. Bring to a high heat until the prawns are cooked.</p><p class="line">5) Taste, and season if needed. Adjust the salt, sour, sweet and heat to your preference. </p><p class="line">6) Remove the lemongrass, lime leaves, galangal and chilli</p>
+        </div>
+    </div>
+
+    <!-- Notes -->
+
+
+    <!-- Nutrition (in regular mode it goes below the notes) -->
+        <!-- Used in two different places depending on the recipe layout -->
+
+    
+    </div>
+    
+    <div class="clear"></div>
+
+</div>
+
+
+
+    </body>
+</html>

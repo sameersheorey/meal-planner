@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            /* Shared styles */
+            body {
+                font-family: Helvetica, sans-serif;
+                font-size: 16px;
+                color: #34302e;
+                margin: 0.25in;
+            }
+            @page {
+                size: letter portrait;
+                margin: 0.25in;
+            }
+            .name {
+                font-size: 18px;
+                font-family: Helvetica, sans-serif;
+                font-weight: normal;
+                margin: 0 0 10px 0;
+            }
+            .categories {
+                color: #605D5D;
+                font-size: 14px;
+                font-family: Helvetica, sans-serif;
+                font-style: italic;
+            }
+            .rating {
+                color: #d10505;
+                font-size: 14px;
+            }
+            .metadata {
+                font-size: 14px;
+            }
+            .infobox p {
+                margin: 0;
+                line-height: 150%;
+            }
+            .subhead {
+                color: #d10505;
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+                margin: 10px 0;
+            }
+            
+            .ingredients p {
+                margin: 4px 0;
+            }
+            /* To prevent nutrition/directions from getting too close
+               to ingredients */
+            .ingredients {
+                padding-bottom: 10px;
+            }
+            .clear {
+                clear:both;
+            }
+            a {
+                color: #4990E2;
+                text-decoration: none;
+            }
+            /* Full page specific styles */
+            .text {
+                line-height: 130%;
+            }
+            .photobox {
+                float: left;
+                margin-right: 14px;
+                            }
+            .photo {
+                max-width: 140px;
+                max-height: 140px;
+                width: auto;
+                height: auto;
+            }
+            .inline-image {
+                max-width: 25%;
+                max-height: 25%;
+                width: auto;
+                height: auto;
+            }
+            .photoswipe {
+                border: 1px #dddddd solid;
+                cursor: pointer;
+            }
+            .pswp__caption__center {
+                text-align: center !important;
+            }
+            .recipe {
+                page-break-after: always;
+                            }
+            .recipe:first-child {
+                border-top: 0 none;
+                margin-top: 0;
+                padding-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Recipe -->
+<div class="recipe" itemscope itemtype="http://schema.org/Recipe" >
+    
+    <div class="infobox">
+
+        <!-- Image -->
+
+        <!-- Name -->
+        <h1 itemprop="name" class="name">Slow-Cooker Turkey Chili</h1>
+        
+        <!-- Info -->
+        
+        <!-- Rating, categories -->
+        <p itemprop="aggregateRating" class="rating" value="0"></p>
+            <p itemprop="recipeCategory" class="categories">Chicken, Dinner</p>
+        
+        <p class="metadata">
+        
+            <!-- Cook time, prep time, servings, difficulty -->
+            <b>Prep Time: </b><span itemprop="">20 mins</span>
+            <b>Cook Time: </b><span itemprop="">4 hours</span>
+            <b>Total Time: </b><span itemprop="">4 hours 20 mins</span>
+            <b>Servings: </b><span itemprop="">8</span>
+
+            <!-- Source -->
+                <b>Source: </b>
+                    <a itemprop="url" href="https://www.delish.com/cooking/recipe-ideas/recipes/a55200/easy-turkey-slow-cooker-chili-recipe/">
+                        <span itemprop="author">Delish.com</span>
+                    </a>
+                            
+        </p>
+        
+        <div class="clear"></div>
+
+    </div>
+    
+    <div class="left-column">
+
+        <!-- Ingredients -->
+        <div class="ingredientsbox">
+            <h3 class="subhead">Ingredients</h3>
+            <div class="ingredients text">
+                <p class="line" itemprop="recipeIngredient"><strong>1</strong> tbsp oil</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> red onion</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> green pepper</p><p class="line" itemprop="recipeIngredient"><strong>750</strong>g turkey mince</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> cloves garlic, minced</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> tbsp. tomato puree</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tin chopped tomatoes </p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tin black beans, rinsed and drained</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tin kidney beans, rinsed and drained</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> chicken stock cube</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> tsp. chili powder</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tsp. ground cumin</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tsp. dried oregano</p><br/><p class="line" itemprop="recipeIngredient"><em><strong>Optional garnish:</strong></em></p><p class="line" itemprop="recipeIngredient">Grated cheese</p><p class="line" itemprop="recipeIngredient">Spring onions</p>
+            </div>
+        </div>
+        
+        <!-- Nutrition (in two-column mode it goes below the ingredients) -->
+
+    </div>
+    
+    <div class="right-column">
+    
+    <!-- Description -->
+
+    <!-- Directions -->
+    <div class="directionsbox">
+        <h3 class="subhead">Directions</h3>
+        <div itemprop="recipeInstructions" class="directions text">
+            <p class="line">1) Dice the onion and pepper</p><p class="line">2) Heat oil at medium-high heat in a large pan (or slow cooker pot)</p><p class="line">3) Add onion and pepper and cook until beginning to soften, about 4 minutes</p><p class="line">4) Add ground turkey and cook, stirring occasionally, until turkey is browned. Season with salt and pepper, then stir in garlic and tomato puree and cook until fragrant, about 2 minutes. </p><p class="line">5) Transfer mixture to a slow cooker and add tomatoes, black beans, kidney beans, chicken broth, chili powder, cumin and oregano. </p><p class="line">6) Cook on high for 4 hours, until chili has thickened. Check for seasoning and season with salt and pepper to taste.</p><p class="line">7) Garnish with cheese and spring onions, if desired.</p>
+        </div>
+    </div>
+
+    <!-- Notes -->
+
+
+    <!-- Nutrition (in regular mode it goes below the notes) -->
+        <!-- Used in two different places depending on the recipe layout -->
+
+    
+    </div>
+    
+    <div class="clear"></div>
+
+</div>
+
+
+
+    </body>
+</html>

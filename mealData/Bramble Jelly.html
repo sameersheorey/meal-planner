@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            /* Shared styles */
+            body {
+                font-family: Helvetica, sans-serif;
+                font-size: 16px;
+                color: #34302e;
+                margin: 0.25in;
+            }
+            @page {
+                size: letter portrait;
+                margin: 0.25in;
+            }
+            .name {
+                font-size: 18px;
+                font-family: Helvetica, sans-serif;
+                font-weight: normal;
+                margin: 0 0 10px 0;
+            }
+            .categories {
+                color: #605D5D;
+                font-size: 14px;
+                font-family: Helvetica, sans-serif;
+                font-style: italic;
+            }
+            .rating {
+                color: #d10505;
+                font-size: 14px;
+            }
+            .metadata {
+                font-size: 14px;
+            }
+            .infobox p {
+                margin: 0;
+                line-height: 150%;
+            }
+            .subhead {
+                color: #d10505;
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+                margin: 10px 0;
+            }
+            
+            .ingredients p {
+                margin: 4px 0;
+            }
+            /* To prevent nutrition/directions from getting too close
+               to ingredients */
+            .ingredients {
+                padding-bottom: 10px;
+            }
+            .clear {
+                clear:both;
+            }
+            a {
+                color: #4990E2;
+                text-decoration: none;
+            }
+            /* Full page specific styles */
+            .text {
+                line-height: 130%;
+            }
+            .photobox {
+                float: left;
+                margin-right: 14px;
+                            }
+            .photo {
+                max-width: 140px;
+                max-height: 140px;
+                width: auto;
+                height: auto;
+            }
+            .inline-image {
+                max-width: 25%;
+                max-height: 25%;
+                width: auto;
+                height: auto;
+            }
+            .photoswipe {
+                border: 1px #dddddd solid;
+                cursor: pointer;
+            }
+            .pswp__caption__center {
+                text-align: center !important;
+            }
+            .recipe {
+                page-break-after: always;
+                            }
+            .recipe:first-child {
+                border-top: 0 none;
+                margin-top: 0;
+                padding-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Recipe -->
+<div class="recipe" itemscope itemtype="http://schema.org/Recipe" >
+    
+    <div class="infobox">
+
+        <!-- Image -->
+
+        <!-- Name -->
+        <h1 itemprop="name" class="name">Bramble Jelly</h1>
+        
+        <!-- Info -->
+        
+        <!-- Rating, categories -->
+        <p itemprop="aggregateRating" class="rating" value="0"></p>
+            <p itemprop="recipeCategory" class="categories">Jam, Preserves</p>
+        
+        <p class="metadata">
+        
+            <!-- Cook time, prep time, servings, difficulty -->
+
+            <!-- Source -->
+
+        </p>
+        
+        <div class="clear"></div>
+
+    </div>
+    
+    <div class="left-column">
+
+        <!-- Ingredients -->
+        <div class="ingredientsbox">
+            <h3 class="subhead">Ingredients</h3>
+            <div class="ingredients text">
+                <p></p><p class="line" itemprop="recipeIngredient"><strong>3</strong>lb blackberries, washed</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> large cooking apples, washed, cored and diced</p><p class="line" itemprop="recipeIngredient"><strong>3/4</strong> pint water</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> lemon, juice only</p><p class="line" itemprop="recipeIngredient">preserving or granulated sugar</p><p class="line" itemprop="recipeIngredient"><strong>2-3</strong> tbsp crème de cassis (optional)</p>
+            </div>
+        </div>
+        
+        <!-- Nutrition (in two-column mode it goes below the ingredients) -->
+
+    </div>
+    
+    <div class="right-column">
+    
+    <!-- Description -->
+
+    <!-- Directions -->
+    <div class="directionsbox">
+        <h3 class="subhead">Directions</h3>
+        <div itemprop="recipeInstructions" class="directions text">
+            <p class="line">Prepare a jelly bag or tea towel by boiling in water for 2-3 minutes. Wring well and leave to cool. Arrange the jelly bag on a stand or up-turned stool with a large bowl beneath, ready for the fruit juice to drip through.<br/>Place the blackberries, apple, water and lemon juice in a preserving or large, heavy based saucepan.<br/>Bring to the boil, then simmer over a low heat for 20-25 minutes or until the fruit is completely soft.<br/>Tip the soft fruit and juice into the jelly bag and leave to drip for 8 hours or until all the juice has been released.<br/>Prepare the jam jars by washing in hot soapy water and leaving to dry and warm in a cool oven - 130C/250F/Gas ½ for 10-15 minutes.<br/>Measure the juice. For every 600ml/1 pint weigh 450g/1lb sugar. Put the juice and sugar back into the clean preserving pan, heat over a low heat until all the sugar has dissolved, add the crème de cassis, if using. Bring to the boil and simmer for 10-15 minutes or until setting point is reached.<br/>Skim away any scum from the top of the jelly and fill the jam jars to the brim. Cover, seal and label. Store in a cool, dark place until required.</p><p></p>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    
+    <div class="notesbox">
+        <h3 class="subhead">Notes</h3>
+        <div itemprop="comment" class="notes text">
+            <p>650ml juice from 1.4kg blackberries made 3.5 Mustard jars.</p><p>1.1L juice from 2kg blackberries produced 3.5 honey jars </p><p>2.1kg blackberries 1350 ml juice</p><p>1 Rising boil only.</p>
+        </div>
+    </div>
+    
+
+    <!-- Nutrition (in regular mode it goes below the notes) -->
+        <!-- Used in two different places depending on the recipe layout -->
+
+    
+    </div>
+    
+    <div class="clear"></div>
+
+</div>
+
+
+
+    </body>
+</html>
