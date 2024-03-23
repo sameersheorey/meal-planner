@@ -54,6 +54,8 @@ for mealAttributes in meals.values():
             vegMeals[i] = mealAttributes
             i += 1
 
+# Create a random menu for the week out of the veg meals
+
 menu = {}
 days = ['M', 'Tu','W', 'Th', 'F', 'Sa', 'Su']
 
@@ -63,4 +65,12 @@ for day in days:
 for day in menu.keys():
      print(f"{day}: {menu[day]['title'].text}")
 
-print(menu['M'].keys())
+# Create an ingredients list for the week
+     
+new_ingredients = []
+for day in menu.keys():
+    for ingredient in menu[day]['ingredients']:
+        print(ingredient.text)
+        new_ingredients.append(ingredient.text)
+
+print(new_ingredients)
