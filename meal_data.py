@@ -1,13 +1,14 @@
 import numpy as np
 import os
 import random
-# import html5lib
 from bs4 import BeautifulSoup
 
-# Open the HTML file
-mealList = []
+meals = {}
 
-for file in os.listdir('mealData'):
+# Open the HTML file
+for idx, file in enumerate(os.listdir('mealData')):
+    mealAttributes = {}
+    # print(idx)
     filename = os.fsdecode(file)
     # print(filename)
     if filename == '.DS_Store':
@@ -17,24 +18,49 @@ for file in os.listdir('mealData'):
         # Read the contents of the file
         html_content = file.read()
 
-        # Create a BeautifulSoup object
-        soup = BeautifulSoup(html_content, 'html.parser')
-        #print(soup)
+    # Create a BeautifulSoup object
+    soup = BeautifulSoup(html_content, 'html.parser')
 
-        # Extract data based on HTML tags, attributes, etc.
-        # Example: Extracting all text from paragraph tags
-        # paragraphs = soup.find_all('p')
-        # for paragraph in paragraphs:
-        #     print(paragraph.get_text())
+    # Extract meal title
+    title = soup.find('h1')
+    mealAttributes['title'] = title
 
-        # Example: Extract meal title
-        titles = soup.find_all('h1')
-        for title in titles:
-            mealList.append(title.get_text())
+    # Extract rating
+    rating = soup.find('p', class_="rating")
+    mealAttributes['rating'] = rating['value']
 
-meals = {}
-for i in range(1,7):
-    meals[i] = random.choice(mealList)
+    # Extract metadata (prep time, cook time, total time, servings)
+    metadata = soup.find('p', class_="metadata")
+    mealAttributes['metadata'] = metadata
 
-print(meals)
-      
+    # Extract meal categories
+    cats = soup.find('p', class_="categories")
+    mealAttributes['categories'] = cats
+    
+    # Extract meal ingredients
+    ingredients = soup.find_all('p', itemprop="recipeIngredient")
+    for ingredient in ingredients:
+        mealAttributes['ingredients'] = ingredients
+
+    meals[idx] = mealAttributes
+
+# Filter meals to vegetarian only
+
+vegMeals = {}
+
+i=0
+for mealAttributes in meals.values():
+    if mealAttributes['categories'] is not None and 'vegetarian'.casefold() in mealAttributes['categories'].text.casefold():
+            vegMeals[i] = mealAttributes
+            i += 1
+
+menu = {}
+days = ['M', 'Tu','W', 'Th', 'F', 'Sa', 'Su']
+
+for day in days: 
+    menu[day] = random.choice(vegMeals)
+    
+for day in menu.keys():
+     print(f"{day}: {menu[day]['title'].text}")
+
+print(menu['M'].keys())
