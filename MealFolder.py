@@ -1,27 +1,21 @@
 import os
 from bs4 import BeautifulSoup
-
-class MealCard:
-     def __init__(self, mealdata):
-        """Initialize the MealCard object with data from a meal HMTL file.
-        
-        Args:
-            mealdata: BeautifulSoup object representing the HTML content of a meal HTML file.
-        """
-        
-        self.title = mealdata.find('h1')
-        self.rating = mealdata.find('p', class_="rating")
-        self.metadata = mealdata.find('p', class_="metadata")
-        self.cats = mealdata.find('p', class_="categories")
-        self.ingredients = mealdata.find_all('p', itemprop="recipeIngredient")
-
+from MealCard import MealCard
 
 class MealFolder:
+    """A class to manage collections of MealCard objects.
+
+    Attributes:
+        titles (list): A list to store titles of meal cards.
+        mealcards (list): A list to store MealCard objects.
+    """
+
     def __init__(self):
         """Initialize a MealFolder object.
         
         Creates an empty list to store titles and another empty list to store MealCard objects.
         """
+        
         self.titles = []
         self.mealcards = []
         
@@ -99,14 +93,3 @@ class MealFolder:
             iterator: An iterator over the meal cards stored in the MealFolder.
         """
         return iter(self.mealcards)
-
-vegMealFolder = MealFolder()
-vegMealFolder.add_all('vegetarian')
-
-# Some checks
-print(vegMealFolder.titles)
-
-for m in vegMealFolder:
-    print(m.title.text)
-
-print(vegMealFolder.get_mealcard('Spanakopita').title.text)
