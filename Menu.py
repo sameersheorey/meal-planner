@@ -1,4 +1,5 @@
 import random
+import MealFolder
 
 class Menu:
     """A class to manage weekly menus.
@@ -18,7 +19,7 @@ class Menu:
         self.menu_titles = []
         self.ingredients = []
 
-    def add_menu(self, MealFolder, menu_generator="random"):
+    def add_menu(self, MealFolder: MealFolder, menu_generator: str = "random") -> None:
         """Add a menu to the list of weekly menus, the menu titles to the list of weekly menu titles
           and the ingredients from that menus to the list of weekly ingredients
         
@@ -27,13 +28,13 @@ class Menu:
             menu_generator (str, optional): The type of menu generator to use. Defaults to "random".
         """
         if menu_generator == "random":
-            menu = self.RandomMenuGenerator(MealFolder)
+            menu, titles, ingredients = self.RandomMenuGenerator(MealFolder)
 
         self.menus.append(menu)
-        self.menu_titles.append(self.MenuTitleGenerator(menu))
-        self.ingredients.append(self.IngredientsGenerator(menu)) 
+        self.menu_titles.append(titles)
+        self.ingredients.append(ingredients) 
     
-    def replace_menu(self, MealFolder, menu_generator="random"):
+    def replace_menu(self, MealFolder: MealFolder, menu_generator: str ="random") -> None:
         """Replace the latest weekly menu, weekly menu titles and weekly ingredients in 
             their respeecive lists with those of a newly generated menu.
         
@@ -42,13 +43,13 @@ class Menu:
             menu_generator (str, optional): The type of menu generator to use. Defaults to "random".
         """
         if menu_generator == "random":
-            menu = self.RandomMenuGenerator(MealFolder)
+            menu, titles, ingredients = self.RandomMenuGenerator(MealFolder)
 
-        self.menus[-1] = self.RandomMenuGenerator(MealFolder)
-        self.menu_titles[-1]= self.MenuTitleGenerator(menu)
-        self.ingredients[-1] = self.IngredientsGenerator(menu)
+        self.menus[-1] = menu
+        self.menu_titles[-1]= titles
+        self.ingredients[-1] = ingredients
 
-    def RandomMenuGenerator(self, MealFolder):
+    def RandomMenuGenerator(self, MealFolder: MealFolder) -> dict:
         """Generate a random weekly menu from the given MealFolder.
         
         Args:
@@ -56,47 +57,20 @@ class Menu:
         
         Returns:
             dict: A dictionary representing the weekly menu, with days as keys and meal cards as values.
+            dict: A dictionary with the weekly menu titles, with days as keys and meal titles as values.
+            list: A list of ingredients extracted from the menu.
         """
         
         menu = {}
-        days = ['M', 'Tu','W', 'Th', 'F', 'Sa', 'Su']
-
-        for day in days: 
-            menu[day] = random.choice(MealFolder.mealcards)
-        
-        return menu
-
-    def MenuTitleGenerator(self, menu):
-        """Generate a dictionary of menu titles from a menu.
-        
-        Args:
-            menu (dict): A dictionary representing the menu, with days as keys and meal information as values.
-
-        Returns:
-            dict: A dictionary with the weekly menu titles, with days as keys and meal titles as values.
-        """
-        
         titles = {}
+        new_ingredients = []
         days = ['M', 'Tu','W', 'Th', 'F', 'Sa', 'Su']
 
-        for day in days: 
+        for day in days:
+            menu[day] = random.choice(MealFolder.mealcards)
             titles[day] = menu[day].title.text
-        
-        return titles
 
-    def IngredientsGenerator(self, menu):
-        """Generate a list of ingredients from a given menu.
-        
-        Args:
-            menu (dict): A dictionary representing the menu, with days as keys and meal information as values.
-
-        Returns:
-            list: A list of ingredients extracted from the menu.
-        """
-
-        new_ingredients = []
-
-        for day in menu.keys():
             for ingredient in menu[day].ingredients:
                 new_ingredients.append(ingredient.text)
-        return new_ingredients
+        
+        return menu, titles, new_ingredients

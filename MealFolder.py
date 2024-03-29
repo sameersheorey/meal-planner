@@ -19,7 +19,7 @@ class MealFolder:
         self.titles = []
         self.mealcards = []
         
-    def add_all(self, filter = None):
+    def add_all(self, filter: str = None) -> None:
         """Generate MealCard objects from all (subject to filter) HTML files in the 'mealData' directory
             and add to the MealFolder object.
         
@@ -30,31 +30,26 @@ class MealFolder:
         """
 
         for file in os.listdir('mealData'):
-            # Open the HTML files
+    
             filename = os.fsdecode(file)
             
             if filename == '.DS_Store':
                 continue
 
             with open(f'mealData/{filename}', 'r', encoding='utf-8') as file:
-                # Read the contents of the file
                 html_content = file.read()
 
-            # Create a BeautifulSoup object
             mealdata = BeautifulSoup(html_content, 'html.parser')
 
-            # Create a meal card
             new_mealcard = MealCard(mealdata)
 
-            # If no filter is specified add meal card
             if filter is None:
                 self.add(new_mealcard)
 
-            # If filter specified on add only meal cards satisfying the filter
             elif new_mealcard.cats is not None and filter.casefold() in new_mealcard.cats.text.casefold():
                 self.add(new_mealcard)
         
-    def get_mealcard(self, title):
+    def get_mealcard(self, title: str) -> MealCard:
         """Retrieve a MealCard object from the MealFolder by its title.
 
         Args:
@@ -71,7 +66,7 @@ class MealFolder:
                 return meal_card
         raise ValueError(f'Meal with title "{title}" not found')    
     
-    def add(self, meal):
+    def add(self, meal: MealCard) -> None:
         """Add a MealCard object to the MealFolder.
         
         Args:

@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+
 class MealCard:
     """A class to represent a single meal card.
 
@@ -9,7 +11,7 @@ class MealCard:
         ingredients (list): List of ingredients for the meal.
     """
     
-    def __init__(self, mealdata):
+    def __init__(self, mealdata: BeautifulSoup) -> None:
         """Initialize the MealCard object with data from a meal HMTL file.
         
         Args:
