@@ -19,41 +19,41 @@ class Menu:
         self.menu_titles = []
         self.ingredients = []
 
-    def add_menu(self, MealFolder: MealFolder, menu_generator: str = "random") -> None:
+    def add_menu(self, meal_folder: MealFolder, menu_generator: str = "random") -> None:
         """Add a menu to the list of weekly menus, the menu titles to the list of weekly menu titles
           and the ingredients from that menus to the list of weekly ingredients
         
         Args:
-            MealFolder (MealFolder): The MealFolder object from which to generate the menu.
+            meal_folder (MealFolder): The MealFolder object from which to generate the menu.
             menu_generator (str, optional): The type of menu generator to use. Defaults to "random".
         """
         if menu_generator == "random":
-            menu, titles, ingredients = self.RandomMenuGenerator(MealFolder)
+            menu, titles, ingredients = self.RandomMenuGenerator(meal_folder)
 
         self.menus.append(menu)
         self.menu_titles.append(titles)
         self.ingredients.append(ingredients) 
     
-    def replace_menu(self, MealFolder: MealFolder, menu_generator: str ="random") -> None:
+    def replace_menu(self, meal_folder: MealFolder, menu_generator: str ="random") -> None:
         """Replace the latest weekly menu, weekly menu titles and weekly ingredients in 
             their respeecive lists with those of a newly generated menu.
         
         Args:
-            MealFolder (MealFolder): The MealFolder object from which to generate the menu.
+            meal_folder (MealFolder): The MealFolder object from which to generate the menu.
             menu_generator (str, optional): The type of menu generator to use. Defaults to "random".
         """
         if menu_generator == "random":
-            menu, titles, ingredients = self.RandomMenuGenerator(MealFolder)
+            menu, titles, ingredients = self.RandomMenuGenerator(meal_folder)
 
         self.menus[-1] = menu
         self.menu_titles[-1]= titles
         self.ingredients[-1] = ingredients
 
-    def RandomMenuGenerator(self, MealFolder: MealFolder) -> dict:
+    def RandomMenuGenerator(self, meal_folder: MealFolder) -> dict:
         """Generate a random weekly menu from the given MealFolder.
         
         Args:
-            MealFolder (MealFolder): The MealFolder object to generate the menu from.
+            meal_folder (MealFolder): The MealFolder object to generate the menu from.
         
         Returns:
             dict: A dictionary representing the weekly menu, with days as keys and meal cards as values.
@@ -67,7 +67,7 @@ class Menu:
         days = ['M', 'Tu','W', 'Th', 'F', 'Sa', 'Su']
 
         for day in days:
-            menu[day] = random.choice(MealFolder.mealcards)
+            menu[day] = random.choice(meal_folder.mealcards)
             titles[day] = menu[day].title.text
 
             for ingredient in menu[day].ingredients:
