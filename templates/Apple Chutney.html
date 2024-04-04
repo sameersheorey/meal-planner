@@ -105,33 +105,27 @@
 
         <!-- Image -->
         <div class="photobox">
-            <a href="https://www.frontiercoop.com/sites/default/files/styles/recipe_background_mobile_768x768/public/acquiadam/2020-08/egg_bake-540x54018.jpg?itok=7Kv6Uapc">
-                <img src="Images/3C21DB96-E726-430E-9E02-05E18BBC8A66/F65EAFB1-726B-4906-995A-12CB7388701E.jpg" itemprop="image" class="photo photoswipe"/>
+            <a href="#">
+                <img src="Images/3061E54C-FF11-4848-BE6E-B90B5698D403/9660012C-3D1D-473B-A2DA-AB77ABC58F8F.jpg" itemprop="image" class="photo photoswipe"/>
             </a>
                     </div>
 
         <!-- Name -->
-        <h1 itemprop="name" class="name">Spinach Egg Bake</h1>
+        <h1 itemprop="name" class="name">Apple Chutney</h1>
         
         <!-- Info -->
         
         <!-- Rating, categories -->
         <p itemprop="aggregateRating" class="rating" value="0"></p>
-            <p itemprop="recipeCategory" class="categories">Breakfast</p>
+            <p itemprop="recipeCategory" class="categories">Chutney</p>
         
         <p class="metadata">
         
             <!-- Cook time, prep time, servings, difficulty -->
-            <b>Prep Time: </b><span itemprop="">15 mins</span>
-            <b>Cook Time: </b><span itemprop="">15 mins</span>
-            <b>Servings: </b><span itemprop="">4</span>
+            <b>Servings: </b><span itemprop="">Makes 7 lbs</span>
 
             <!-- Source -->
-                <b>Source: </b>
-                    <a itemprop="url" href="https://www.frontiercoop.com/recipes-by-collection/vegetarian/vegetarian-breakfast-and-brunch/homemade-spinach-egg-bake">
-                        <span itemprop="author">Frontiercoop.com</span>
-                    </a>
-                            
+
         </p>
         
         <div class="clear"></div>
@@ -144,7 +138,7 @@
         <div class="ingredientsbox">
             <h3 class="subhead">Ingredients</h3>
             <div class="ingredients text">
-                <p class="line" itemprop="recipeIngredient"><strong>12</strong> eggs</p><p class="line" itemprop="recipeIngredient"><strong>180</strong> ml whole milk</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tsp rosemary</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> tsp thyme</p><p class="line" itemprop="recipeIngredient"><strong>120</strong>g spinach</p><p class="line" itemprop="recipeIngredient"><strong>45</strong>g mature cheddar</p>
+                <p class="line" itemprop="recipeIngredient"><strong>4</strong>lbs fruit</p><p class="line" itemprop="recipeIngredient"><strong>8</strong>oz onion</p><p class="line" itemprop="recipeIngredient"><strong>1</strong> lb sultanas</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> tsp salt</p><p class="line" itemprop="recipeIngredient"><strong>1.5</strong> pts vinegar</p><p class="line" itemprop="recipeIngredient"><strong>1.5</strong> lbs soft brown sugar</p><p class="line" itemprop="recipeIngredient">juice of 1 lemon</p><p class="line" itemprop="recipeIngredient"><strong>2</strong> tbsp. curry powder (if using a hot one, you don’t need nearly as much).</p>
             </div>
         </div>
         
@@ -160,7 +154,7 @@
     <div class="directionsbox">
         <h3 class="subhead">Directions</h3>
         <div itemprop="recipeInstructions" class="directions text">
-            <p class="line">1) Preheat oven to 190˚C</p><p class="line">2) Crack eggs into a large bowl and add the milk, herbs, and black pepper. Whisk well to combine.</p><p class="line">3) Divide the spinach across 8 sections of a moulded tin. </p><p class="line">4) Divide the egg mixture evenly over the spinach, filling each cup about ¾ of the way full. </p><p class="line">5) Sprinkle grated cheese over each egg/spinach mixture.</p><p class="line">6) Place the pan in the oven and bake for 30 to 35 minutes. Eggs should looked puffed and starting to brown on the top. If the egg still looks wet, return to the oven and continue cooking for another two minutes.</p>
+            <p class="line">Mince the fruit and onion and simmer along with the sultanas in 1 pint of vinegar for 15 minutes. Add the remaining vinegar and the rest of the ingredients and cook for about 45 minutes or until thick. Makes 7 lbs.</p>
         </div>
     </div>
 
@@ -177,6 +171,87 @@
 
 </div>
 
+<!-- Photo gallery is only included when exporting. -->
+<!-- PhotoSwipe gallery -->
+
+<link rel="stylesheet" href="Resources/PhotoSwipe/photoswipe.css">
+<link rel="stylesheet" href="Resources/PhotoSwipe/default-skin/default-skin.css">
+<script src="Resources/PhotoSwipe/photoswipe.min.js"></script>
+<script src="Resources/PhotoSwipe/photoswipe-ui-default.min.js"></script>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close"></button>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var openPhotoSwipe = function(event) {
+        var pswp = document.querySelector('.pswp');
+        
+        var element = event.target;
+        var src = element.getAttribute('src');
+        
+        // build items array
+        var items = [
+            {
+                msrc: 'Images/3061E54C-FF11-4848-BE6E-B90B5698D403/1B1D016C-0AEF-4D81-8943-26B14D1F90F0.jpg',
+                src: 'Images/3061E54C-FF11-4848-BE6E-B90B5698D403/1B1D016C-0AEF-4D81-8943-26B14D1F90F0.jpg',
+                w: 977,
+                h: 971,
+                title: '1'
+            },
+        ];
+        
+        var index = 0;
+        for (var i=0; i<items.length; i++) {
+            var item = items[i];
+            if (item.src == src) {
+                index = i;
+            }
+        }
+                         
+        var options = {
+            index: index,
+            history: false,
+            focus: true,
+            captionEl: true,
+            fullscreenEl: false,
+            zoomEl: false,
+            shareEl: false,
+            preloaderEl: false,
+            bgOpacity: 0.9,
+            showHideOpacity: true
+        };
+                             
+        var gallery = new PhotoSwipe(pswp, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+    };
+
+    var elements = document.querySelectorAll('.photoswipe');
+    for (var i=0; i<elements.length; i++) {
+        var element = elements[i];
+        element.addEventListener('click', openPhotoSwipe);
+    }
+</script>
 
 
     </body>

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+        <h1>All Meals</h1>
+        <ul>
+                {% for meal in meals %}
+                <li>{{meal.title}}</li>
+                <li>{{meal.rating}}</li>
+                {% endfor %}
+        </ul>
+        <a href="/Borscht">View Meal Folder</a>
+{% endblock %}
