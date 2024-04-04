@@ -1,5 +1,3 @@
-from bs4 import BeautifulSoup
-
 class MealCard:
     """A class to represent a single meal card.
 

@@ -5,7 +5,7 @@ from MealCard import MealCard
 import shutil
 import json
 
-class MealFolder:
+class dbMealFolder:
     """A class to manage collections of MealCard objects stored in a database table.
 
     Attributes:
@@ -13,7 +13,7 @@ class MealFolder:
     """
 
     def __init__(self, db_name='meal_cards.db'):
-        """Initialize a MealFolder object and connect to the database.
+        """Initialize a dbMealFolder object and connect to the database.
         
         Args:
             db_name (str, optional): The filename of the SQLite database. Defaults to 'meal_cards.db'.
@@ -46,12 +46,12 @@ class MealFolder:
             If specified, only meal cards with categories matching the filter will be added.
             Defaults to None, in which case all meal cards are added.
         """
-        for file in os.listdir('mealData'):
+        for file in os.listdir('new_meals'):
             filename = os.fsdecode(file)
             if filename == '.DS_Store':
                 continue
 
-            with open(f'mealData/{filename}', 'r', encoding='utf-8') as file:
+            with open(f'new_meals/{filename}', 'r', encoding='utf-8') as file:
                 html_content = file.read()
 
             mealdata = BeautifulSoup(html_content, 'html.parser')
@@ -76,7 +76,7 @@ class MealFolder:
             # Once added move the files in the mealData folder to templates folder
 
             try:
-                shutil.move(os.path.join('mealData', filename), 'templates')
+                shutil.move(os.path.join('new_meals', filename), 'templates/saved_meals')
             except shutil.Error:
                 # print("Destination path already exists, overwrite it")
                 # shutil.move(os.path.join('mealData', filename), 'templates', copy_function=shutil.copy2)
