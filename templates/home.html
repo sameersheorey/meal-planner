@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 
 {% block body %}
-        <h1>All Meals</h1>
+        <h1>Vegetarian Meals</h1>
+
+        <form action="{{ url_for('add_vegetarian_meals') }}" method="post">
+            <input type="submit" value="Add New Vegetarian Meals">
+        </form>
+
         <ul>
                 {% for meal in meals %}
                 <li> <a href="/{{meal.title}}">{{meal.title}}</a></li>

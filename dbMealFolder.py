@@ -18,7 +18,7 @@ class dbMealFolder:
         Args:
             db_name (str, optional): The filename of the SQLite database. Defaults to 'meal_cards.db'.
         """
-        self.db_connection = sqlite3.connect(db_name)
+        self.db_connection = sqlite3.connect(db_name, check_same_thread=False)
         self.create_table()
 
 

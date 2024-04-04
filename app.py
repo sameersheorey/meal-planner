@@ -1,15 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from dbMealFolder import dbMealFolder
 
 app = Flask(__name__)
 
+veg_meals = dbMealFolder()
 
 @app.route("/")
 def display_all_meals():
-    veg_meals = dbMealFolder()
-    veg_meals.add_all("vegetarian")
     display_meals = veg_meals.get_all_meals()
     return render_template('home.html', meals = display_meals)
+
+@app.route("/add_vegetarian_meals", methods=['POST'])
+def add_vegetarian_meals():
+    veg_meals.add_all("vegetarian")
+    return redirect(url_for('display_all_meals'))
 
 @app.route('/<filename>')
 def serve_html(filename):

@@ -1,5 +1,5 @@
 import random
-import MealFolder
+from dbMealFolder import dbMealFolder
 
 class Menu:
     """A class to manage weekly menus.
