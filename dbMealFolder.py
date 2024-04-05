@@ -9,7 +9,7 @@ class dbMealFolder:
     """A class to manage collections of MealCard objects stored in a database table.
 
     Attributes:
-        db_connection: A connection to the SQLite database.
+        db_connection (sqlite3.Connection): A connection to the SQLite database.
     """
 
     def __init__(self, db_name='meal_cards.db'):

@@ -1,23 +1,22 @@
 import random
 import sqlite3
 from MealCard import MealCard
-from Menu import Menu
+from MenuItem import MenuItem
 import datetime
 
+
 class dbMenu:
-    """A class to manage weekly menus.
+    """A class to manage the menu database.
 
     Attributes:
-        menus (list): A list to store weekly menus.
-        menu_titles (list): A list to store weekly menu titles.
-        ingredients (list): A list to store weekly ingredients.
+        db_connection (sqlite3.Connection): A connection to the SQLite database.
     """
         
-    def __init__(self, db_name='menus.db'):
+    def __init__(self, db_name='menu.db'):
         """Initialize a dbMenus object and connect to the database.
         
         Args:
-            db_name (str, optional): The filename of the SQLite database. Defaults to 'menus.db'.
+            db_name (str, optional): The filename of the SQLite database. Defaults to 'menu.db'.
         """
         self.db_connection = sqlite3.connect(db_name, check_same_thread=False)
         self.create_table()
@@ -35,18 +34,13 @@ class dbMenu:
                 )
             ''')
 
-
-    # GET ALL MEALCARDS FROM THE MEALCARD DATABASE (COMES OUT AS A LIST) AND THEN RANDOMLY SELECT ONE
-    # WE ALSO WANT INGREDIENTS BUT WHEN WE REFERENCE TO THE MEAL DATABASE THIS WILL HAVE ALL INGREDIENTS
     # NEED TO THINK ABOUT HOW TO ADD AND STORE INGREDIENTS 
 
     def add_random_meal(self, meal_cards: list[MealCard]) -> None:
-        """Add a menu to the list of weekly menus, the menu titles to the list of weekly menu titles
-          and the ingredients from that menus to the list of weekly ingredients
+        """Add a randomly selected meal from the provided list of MealCards to the weekly menu.
         
         Args:
-            meal_folder (MealFolder): The MealFolder object from which to generate the menu.
-            menu_generator (str, optional): The type of menu generator to use. Defaults to "random".
+            meal_cards (list[MealCard]): A list of MealCard objects to choose a meal from.
         """
         meal = random.choice(meal_cards)
 
@@ -64,21 +58,20 @@ class dbMenu:
                 raise ValueError('Duplicate date')
 
 
-    # INSTEAD OF MENU DICTIONARY MAKE A MENU CLASS LIKE THE MEAL CARD CLASS
     def get_menu(self):
-        """Retrieve all meal cards from the database.
+        """Retrieve all menu items from the database.
 
         Returns:
-            list: A list of MealCard objects representing all meal cards in the database.
+            list[MenuItem]: A list of MenuItem objects representing all menu items in the database.
         """        
         with self.db_connection:
             cursor = self.db_connection.cursor()
             cursor.execute("SELECT * FROM menu")
-            dbMeals = cursor.fetchall()
+            dbMenu = cursor.fetchall()
 
             menu = []
-            for meal in dbMeals:
-                menu_item = Menu(meal[1], meal[2])
+            for meal in dbMenu:
+                menu_item = MenuItem(meal[1], meal[2])
                 menu.append(menu_item)
 
         return menu

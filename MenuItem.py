@@ -1,4 +1,4 @@
-class Menu:
+class MenuItem:
     """A class to represent a single meal card.
 
     Attributes:
