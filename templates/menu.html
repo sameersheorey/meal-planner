@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+        <h1>Menu</h1>
+
+        <form action="{{ url_for('add_menu_item') }}" method="post">
+            <input type="submit" value="Add Meal To Menu">
+        </form>
+
+        <table border="1">
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                </tr>
+                {% for entry in menu %}
+                <tr>
+                    <td>{{entry.date}}</td>
+                    <td><a href="/{{entry.title}}">{{entry.title}}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        <a href="/">View Meal Folder</a>
+{% endblock %}
