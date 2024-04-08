@@ -40,7 +40,7 @@ class dbShoppingList:
             with self.db_connection:                    
                 self.db_connection.execute(
                     'INSERT INTO menu (ingredient) VALUES (?)',
-                    (ingredient)
+                    (ingredient,)
                 )
           
 

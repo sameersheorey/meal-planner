@@ -12,12 +12,13 @@
                     <th>Date</th>
                     <th>Title</th>
                 </tr>
-                {% for entry in menu %}
+                {% for menu_item, meal_card in menu_display %}
                 <tr>
-                    <td>{{entry.date}}</td>
-                    <td><a href="/{{entry.title}}">{{entry.title}}</a></td>
+                    <td>{{menu_item.date}}</td>
+                    <td><a href="/{{meal_card.title}}">{{meal_card.title}}</a></td>
                 </tr>
                 {% endfor %}
             </table>
         <a href="/">View Meal Folder</a>
+        <a href="/shopping_list">View Shopping List</a>
 {% endblock %}

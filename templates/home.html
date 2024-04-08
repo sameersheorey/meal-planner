@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-        <h1>Vegetarian Meals</h1>
+        <h1>Meals</h1>
 
         <form action="{{ url_for('add_vegetarian_meals') }}" method="post">
             <input type="submit" value="Add New Vegetarian Meals">
@@ -13,4 +13,5 @@
                 {% endfor %}
         </ul>
         <a href="/menu">View Menu</a>
+        <a href="/shopping_list">View Shopping List</a>
 {% endblock %}
