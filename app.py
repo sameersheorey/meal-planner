@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 veg_meals = dbMealFolder()
 menu = dbMenu()
-shopping_list = dbShoppingList()
+shopping_list = dbShoppingList('shopping_list.db')
 
 @app.route("/")
 def display_all_meals():
@@ -35,7 +35,7 @@ def display_menu():
 
 @app.route("/shopping_list")
 def display_shopping_list():
-    ingredients = shopping_list.get_shopping_list()
+    ingredients = shopping_list.get_ingredients_list()
     return render_template('shopping_list.html', ingredients = ingredients)
 
 
@@ -53,6 +53,7 @@ def add_menu_item():
 @app.route('/<filename>')
 def serve_html(filename):
     return render_template(f'saved_meals/{filename}.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
