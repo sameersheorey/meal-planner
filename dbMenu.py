@@ -32,7 +32,7 @@ class dbMenu:
                 CREATE TABLE IF NOT EXISTS menu (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     date TEXT UNIQUE,
-                    meal_id TEXT
+                    meal_id INTEGER
                 )
             ''')
 
