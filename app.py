@@ -45,7 +45,7 @@ def add_menu_item():
     menu.add_random_meal(meals)
     new_meal = menu.get_menu()[-1]
     new_ingredients = veg_meals.get_meal_by_id(new_meal.meal_id).ingredients
-    shopping_list.add_ingredients(new_ingredients, new_meal.meal_id)
+    shopping_list.add_ingredients(new_ingredients, new_meal.menu_id)
     return redirect(url_for('display_menu'))
 
 

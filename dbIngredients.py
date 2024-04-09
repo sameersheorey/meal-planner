@@ -25,23 +25,23 @@ class dbIngredients:
                 CREATE TABLE IF NOT EXISTS menu (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     ingredient TEXT,
-                    meal_id INTEGER
+                    menu_id INTEGER
                 )
             ''')
 
 
-    def add_ingredients(self, ingredients: list[str], meal_id: int = None) -> None:
+    def add_ingredients(self, ingredients: list[str], menu_id: int = None) -> None:
         """Add ingredients to the ingredients list.
         
         Args:
             ingredients (list[str]): A list of ingredients.
-            meal_id (int, optional): ID of the meal. Defaults to None.
+            menu_id (int, optional): ID of the menu item assiciated with ingredients (if there is one). Defaults to None.
         """
         with self.db_connection:
             for ingredient in ingredients:
                 self.db_connection.execute(
-                    'INSERT INTO menu (ingredient, meal_id) VALUES (?, ?)',
-                    (ingredient, meal_id)
+                    'INSERT INTO menu (ingredient, menu_id) VALUES (?, ?)',
+                    (ingredient, menu_id)
                 )
           
 
