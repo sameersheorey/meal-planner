@@ -23,7 +23,6 @@ class dbMenu:
         self.create_table()
 
 
-    # THIS DATABASE SHOULD HAVE ROWS WITH A DATE AND A LINK TO THE ID OF A MEAL IN THE MEAL DATABASE
     def create_table(self):
         """Create the 'menu' table if it does not exist."""
 
@@ -56,6 +55,19 @@ class dbMenu:
                 )
             except sqlite3.IntegrityError:
                 raise ValueError('Duplicate date')
+            
+    
+    def delete_menu_item_by_menu_id(self, menu_id: int) -> None:
+        """Delete the menu item with a particular meal_id.
+
+        Args:
+            menu_id (int): ID of the meal.
+        """
+        with self.db_connection:
+            self.db_connection.execute(
+                'DELETE FROM menu WHERE id = ?',
+                (menu_id,)
+            )
 
 
     def get_menu(self):

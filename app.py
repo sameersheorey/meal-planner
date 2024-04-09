@@ -49,6 +49,13 @@ def add_menu_item():
     return redirect(url_for('display_menu'))
 
 
+@app.route("/delete_menu_item/<menu_id>", methods=['POST'])
+def delete_menu_item(menu_id):
+    shopping_list.delete_ingredients_by_menu_id(menu_id)
+    menu.delete_menu_item_by_menu_id(menu_id)
+    return redirect(url_for('display_menu'))
+
+
 @app.route("/shopping_list")
 def display_shopping_list():
     ingredients = shopping_list.get_ingredients_list()

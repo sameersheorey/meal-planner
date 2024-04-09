@@ -9,7 +9,7 @@ class dbIngredients:
     """
         
     def __init__(self, db_name):
-        """Initialize a dbShoppingList object and connect to the database.
+        """Initialize a dbIngredients object and connect to the database.
         
         Args:
             db_name (str): The filename of the SQLite database.
@@ -19,10 +19,10 @@ class dbIngredients:
 
 
     def create_table(self):
-        """Create the 'shoopping list' table if it does not exist."""
+        """Create the 'Ingredients' table if it does not exist."""
         with self.db_connection:
             self.db_connection.execute('''
-                CREATE TABLE IF NOT EXISTS menu (
+                CREATE TABLE IF NOT EXISTS ingredients_table (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     ingredient TEXT,
                     menu_id INTEGER
@@ -40,7 +40,7 @@ class dbIngredients:
         with self.db_connection:
             for ingredient in ingredients:
                 self.db_connection.execute(
-                    'INSERT INTO menu (ingredient, menu_id) VALUES (?, ?)',
+                    'INSERT INTO ingredients_table (ingredient, menu_id) VALUES (?, ?)',
                     (ingredient, menu_id)
                 )
           
@@ -53,7 +53,7 @@ class dbIngredients:
         """        
         with self.db_connection:
             cursor = self.db_connection.cursor()
-            cursor.execute("SELECT * FROM menu")
+            cursor.execute("SELECT * FROM ingredients_table")
             dbIngredients = cursor.fetchall()
 
             ingredients = []

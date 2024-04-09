@@ -16,6 +16,10 @@
                 <tr>
                     <td>{{menu_item.date}}</td>
                     <td><a href="/{{meal_card.title}}">{{meal_card.title}}</a></td>
+                    <td> <form action="/delete_menu_item/{{menu_item.menu_id}}" method="post">
+                            <input type="submit" value="Delete Meal">
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>
