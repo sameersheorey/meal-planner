@@ -2,17 +2,17 @@ from flask import Flask, render_template, redirect, url_for
 from dbMealFolder import dbMealFolder
 from dbMenu import dbMenu
 from dbShoppingList import dbShoppingList
-from dbStockCupboard import dbStockCupboard
+from dbStoreCupboard import dbStoreCupboard
 
 app = Flask(__name__)
 
 veg_meals = dbMealFolder()
 menu = dbMenu()
 shopping_list = dbShoppingList('shopping_list.db')
-stock_cupboard = dbStockCupboard('stock_cupboard.db')
+store_cupboard = dbStoreCupboard('store_cupboard.db')
 
 # Dummy items added to stock cupboard - note will add items twice in debug mode TODO: workaround for this
-stock_cupboard.add_ingredients(['dummy 1', 'dummy 2', 'dummy 3'])
+store_cupboard.add_ingredients(['dummy 1', 'dummy 2', 'dummy 3'])
 # print('hello')
 
 # TODO: ADD FUNCTIONALITY TO REPLACE MENU ITEMS AND CORRESPONDING SHOPPING LIST INGREDIENTS 
@@ -79,10 +79,10 @@ def display_shopping_list():
     return render_template('shopping_list.html', ingredients = ingredients)
 
 
-@app.route("/stock_cupboard")
-def display_stock_cupboard():
-    ingredients = stock_cupboard.get_ingredients_list()
-    return render_template('stock_cupboard.html', ingredients = ingredients)
+@app.route("/store_cupboard")
+def display_store_cupboard():
+    ingredients = store_cupboard.get_ingredients_list()
+    return render_template('store_cupboard.html', ingredients = ingredients)
 
 
 @app.route('/<filename>')
