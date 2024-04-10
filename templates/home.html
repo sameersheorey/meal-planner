@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
+{% block title %}Meals{% endblock %}
 
-{% block body %}
+{% block content %}
         <h1>Meals</h1>
 
         <form action="{{ url_for('add_vegetarian_meals') }}" method="post">
