@@ -70,6 +70,17 @@ class dbMenu:
             )
 
 
+    def replace_menu_item(self, meal_cards: list[MealCard], menu_id: int)-> None:
+        
+        new_meal = random.choice(meal_cards)
+
+        with self.db_connection:
+            self.db_connection.execute(
+                'UPDATE menu SET meal_id = ? WHERE id = ? ',
+                [new_meal.id, menu_id]
+            )
+       
+
     def get_menu(self):
         """Retrieve all menu items from the database.
 
