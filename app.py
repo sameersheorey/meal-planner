@@ -15,8 +15,6 @@ store_cupboard = dbStoreCupboard('store_cupboard.db')
 store_cupboard.add_ingredients(['dummy 1', 'dummy 2', 'dummy 3'])
 # print('hello')
 
-# TODO: ADD FUNCTIONALITY TO REPLACE MENU ITEMS AND CORRESPONDING SHOPPING LIST INGREDIENTS 
-
 @app.route("/")
 def display_all_meals():
     meals = veg_meals.get_all_meals()
@@ -45,9 +43,6 @@ def display_menu():
 def add_menu_item():
     meals = veg_meals.get_all_meals()
     menu.add_random_meal(meals)
-    new_meal = menu.get_menu()[-1]
-    new_ingredients = veg_meals.get_meal_by_id(new_meal.meal_id).ingredients
-    shopping_list.add_ingredients(new_ingredients, new_meal.menu_id)
     return redirect(url_for('display_menu'))
 
 
@@ -60,16 +55,16 @@ def delete_menu_item(menu_id):
 
 @app.route("/replace_menu_item/<menu_id>", methods=['POST'])
 def replace_menu_item(menu_id):
-    
     shopping_list.delete_ingredients_by_menu_id(menu_id)
-
     meals = veg_meals.get_all_meals()
     menu.replace_menu_item(meals, menu_id)
+    return redirect(url_for('display_menu'))
 
-    new_meal = menu.get_menu()[-1]
-    new_ingredients = veg_meals.get_meal_by_id(new_meal.meal_id).ingredients
-    shopping_list.add_ingredients(new_ingredients, new_meal.menu_id)
 
+@app.route("/add_to_shopping/<menu_id>/<meal_id>", methods=['POST'])
+def add_to_shopping(menu_id, meal_id):
+    new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
+    shopping_list.add_ingredients(new_ingredients, menu_id)
     return redirect(url_for('display_menu'))
 
 

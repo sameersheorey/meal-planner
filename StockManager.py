@@ -3,21 +3,21 @@ from difflib import SequenceMatcher
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-def find_similar_ingredients(stock_cupboard, new_ingredients, similarity_threshold = 0.7):
-    stock_comparison = {}
-    for stock_item in stock_cupboard:
-        similar_items = []
-        for menu_item in new_ingredients:
-            similarity = similar(stock_item, menu_item)
+def find_similar_ingredients(store_cupboard, new_ingredients, similarity_threshold = 0.7):
+    store_comparison = {}
+    for store_ingredient in store_cupboard:
+        similar_ingredients = []
+        for new_ingredient in new_ingredients:
+            similarity = similar(store_ingredient, new_ingredient)
         if similarity > similarity_threshold:
-            similar_items.append(menu_item)
-        if similar_items:
-            stock_comparison[stock_item] = similar_items
-    return stock_comparison
+            similar_ingredients.append(new_ingredient)
+        if similar_ingredients:
+            store_comparison[store_ingredient] = similar_ingredients
+    return store_comparison
 
 # create dummy stock cupboard
 
-stock_cupboard = ['For the pasta and sauce:', '1 tbsp olive oil', '1 brown onion, finely chopped', 
+store_cupboard = ['For the pasta and sauce:', '1 tbsp olive oil', '1 brown onion, finely chopped', 
                   '2 cloves garlic, finely chopped (or 1 cube frozen garlic)', '1/2 tsp chilli flakes', 
                   '500g passata', '4 cubes of frozen spinach', '1/2 tsp salt', '250g dried pasta', 
                   '125g whole-milk ricotta cheese', '25g grated Parmesan cheese', '110g shredded mozzarella cheese', 

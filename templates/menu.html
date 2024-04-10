@@ -17,16 +17,23 @@
                 <tr>
                     <td>{{menu_item.date}}</td>
                     <td><a href="/{{meal_card.title}}">{{meal_card.title}}</a></td>
-                    <td> <form action="/delete_menu_item/{{menu_item.menu_id}}" method="post">
+                    <td> 
+                        <form action="/delete_menu_item/{{menu_item.menu_id}}" method="post">
                             <input type="submit" value="Delete Meal">
                         </form>
                     </td>
-                    <td> <form action="/replace_menu_item/{{menu_item.menu_id}}" method="post">
+                    <td> 
+                        <form action="/replace_menu_item/{{menu_item.menu_id}}" method="post">
                         <input type="submit" value="Replace Meal">
-                    </form>
-                </td>
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
+                        <input type="submit" value="Add ingredients to Shoppping">
+                        </form>
+                    </td>
                 </tr>
-                {% endfor %}
+                {% endfor %}                
             </table>
         <a href="/">View Meal Folder</a>
         <a href="/shopping_list">View Shopping List</a>
