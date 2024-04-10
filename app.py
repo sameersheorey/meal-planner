@@ -65,6 +65,7 @@ def replace_menu_item(menu_id):
 def add_to_shopping(menu_id, meal_id):
     new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
     shopping_list.add_ingredients(new_ingredients, menu_id)
+    menu.toggle_added_to_shopping(menu_id)
     return redirect(url_for('display_menu'))
 
 

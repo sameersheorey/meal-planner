@@ -108,15 +108,16 @@ class dbMealFolder:
             dbMeals = cursor.fetchall()
             meals = []
 
-            for meal_card in dbMeals:
+            for row in dbMeals:
                 # Parse ingredients string into a Python list
-                ingredients = json.loads(meal_card[5])
+                ingredients = json.loads(row[5])
 
-                meal = MealCard(meal_card[0], meal_card[1], meal_card[2], meal_card[3], meal_card[4], ingredients)
+                meal = MealCard(row[0], row[1], row[2], row[3], row[4], ingredients)
                 meals.append(meal)
 
         return meals
     
+
     def get_meal_by_id(self, id: int) -> MealCard:
         """Retrieve a meal from the database by its ID.
 
@@ -124,7 +125,7 @@ class dbMealFolder:
             id (int): The ID of the meal to retrieve.
 
         Returns:
-            list[MealCard]: A list of MealCard objects representing the meal card(s) with the given ID.
+            MealCard: A MealCard object representing the meal card with the given ID.
         """
 
         with self.db_connection:
@@ -132,10 +133,10 @@ class dbMealFolder:
             cursor.execute("SELECT * FROM meal_cards WHERE id = ?", [id])
             dbMeals = cursor.fetchall()
 
-            for meal_card in dbMeals:
+            for row in dbMeals:
                 # Parse ingredients string into a Python list
-                ingredients = json.loads(meal_card[5])
+                ingredients = json.loads(row[5])
 
-                meal = MealCard(meal_card[0], meal_card[1], meal_card[2], meal_card[3], meal_card[4], ingredients)
+                meal = MealCard(row[0], row[1], row[2], row[3], row[4], ingredients)
 
         return meal

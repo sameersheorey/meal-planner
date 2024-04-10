@@ -28,8 +28,11 @@
                         </form>
                     </td>
                     <td> 
-                        <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
+                        <!-- <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
                         <input type="submit" value="Add ingredients to Shoppping">
+                        </form> -->
+                        <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
+                            <input type="submit" value="Add ingredients to Shopping" {% if menu_item.added_to_shopping == 1 %} disabled {% endif %}>
                         </form>
                     </td>
                 </tr>
