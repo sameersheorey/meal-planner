@@ -4,6 +4,7 @@ from dbMenu import dbMenu
 from dbShoppingList import dbShoppingList
 from dbStoreCupboard import dbStoreCupboard
 from flask import request
+from utils import *
 
 app = Flask(__name__)
 
@@ -42,14 +43,16 @@ def display_menu():
 
 @app.route("/add_menu_item", methods=['GET','POST'])
 def add_menu_item():
+    meals = veg_meals.get_all_meals()
+
     if request.method == 'POST':
         selected_start_date = request.form.get('startDate')
-        # selected_end_date = request.form.get('selectedEndDate')
-    print(selected_start_date)
-    print('hello')
-    meals = veg_meals.get_all_meals()
-    # TODO: for statement selecting through all dates
-    menu.add_random_meal(meals, selected_start_date)
+        selected_end_date = request.form.get('endDate')
+    
+    dates = get_dates_in_between(selected_start_date, selected_end_date )
+    for date in dates:
+        menu.add_random_meal(meals, date)
+    
     return redirect(url_for('display_menu'))
 
 

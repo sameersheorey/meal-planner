@@ -2,7 +2,7 @@ import random
 import sqlite3
 from MealCard import MealCard
 from MenuItem import MenuItem
-import datetime
+from datetime import datetime
 
 
 class dbMenu:
@@ -47,7 +47,7 @@ class dbMenu:
         meal = random.choice(meal_cards)
 
         newdate = date
-
+       
         with self.db_connection:
             try:                
                 self.db_connection.execute(

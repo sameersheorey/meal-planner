@@ -21,6 +21,8 @@
               <input type="text" id="endDate" name="endDate">
             
               <input type="submit" value="Add meal to menu">
+
+              <div id="results"></div>
             </form>
             
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -30,29 +32,21 @@
             document.addEventListener("DOMContentLoaded", function() {
               var startDateInput = document.getElementById("startDate");
               var endDateInput = document.getElementById("endDate");
+              var resultsDiv = $("#results");
             
               $(startDateInput).datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'DD, d MM',
                 onSelect: function(selectedDate) {
                   $(endDateInput).datepicker("option", "minDate", selectedDate);
-                  updateOutput();
                 }
               });
             
               $(endDateInput).datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'DD, d MM',
                 onSelect: function(selectedDate) {
                   $(startDateInput).datepicker("option", "maxDate", selectedDate);
-                  updateOutput();
                 }
               });
-            
-              function updateOutput() {
-                var startDate = startDateInput.value;
-                var endDate = endDateInput.value;
-                console.log("Start Date: " + startDate);
-                console.log("End Date: " + endDate);
-              }
             });
             </script>
             
