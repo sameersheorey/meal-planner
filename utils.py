@@ -25,7 +25,6 @@ def change_date_format(date_str):
 
     return formatted_date
 
-check = change_date_format('2022-01-01')  # 'Saturday, 01 January'
-print(check)
+
 
 

@@ -31,7 +31,7 @@ def add_vegetarian_meals():
 
 @app.route("/menu")
 def display_menu():
-    menu_items = menu.get_menu()
+    menu_items = menu.get_menu(order_by_date=True)
     meals = []
     dates = []
 
@@ -46,17 +46,23 @@ def display_menu():
     return render_template('menu.html', menu_display = menu_display, dates = dates)
 
 
-@app.route("/add_menu_item", methods=['GET','POST'])
+@app.route("/add_menu_item", methods=['POST'])
 def add_menu_item():
     meals = veg_meals.get_all_meals()
 
-    if request.method == 'POST':
-        selected_start_date = request.form.get('startDate')
-        selected_end_date = request.form.get('endDate')
+    selected_start_date = request.form.get('startDate')
+    selected_end_date = request.form.get('endDate')
     
     dates = get_dates_in_between(selected_start_date, selected_end_date )
+    
     for date in dates:
-        menu.add_random_meal(meals, date)
+        menu_item = menu.get_menu_item_by_date(date)
+        if menu_item is not None:
+            return render_template('repeated_date.html', menu_item = menu_item)
+        # TODO: if date already exists in database, ask user if they want to replace it,
+        # if yes, replace it (redirect to replace menu_item with menu_id related to that tag), if no, skip it
+        else:
+            menu.add_random_meal(meals, date)
     
     return redirect(url_for('display_menu'))
 

@@ -88,29 +88,38 @@ class dbMenu:
             )
        
 
-    def get_menu_item_by_menu_id(self, id: int) -> MealCard:
-        """Retrieve a menu from the database by its ID.
+    def get_menu_item_by_date(self, date: str) -> MealCard:
+        """Retrieve a menu from the database by its date.
 
         Args:
-            id (int): The ID of the menu to retrieve.
-
+            date (str): The date of the menu to retrieve.
+            
         Returns:
-            MenuItem: A MenuItem object representing the menu item with the given ID.
+            MenuItem: A MenuItem object representing the menu item with the given date.
         """
 
         with self.db_connection:
             cursor = self.db_connection.cursor()
-            cursor.execute("SELECT * FROM menu WHERE id = ?", [id])
+            
+   
+            cursor.execute("SELECT * FROM menu WHERE date = ?", [date])
+            
             dbMenu = cursor.fetchall()
 
-            for row in dbMenu:
-                menu_item = MealCard(row[0], row[1], row[2], row[3])
+            if dbMenu:
+                row = dbMenu[0]
+                menu_item = MenuItem(row[0], row[1], row[2], row[3])
+                return menu_item
 
-        return menu_item
+            else: 
+                return None
+    
 
-
-    def get_menu(self):
+    def get_menu(self, order_by_date: bool = False) -> list[MenuItem]:
         """Retrieve all menu items from the database.
+
+        Args:
+            order_by_date (bool, optional): Whether to order the results by date. Defaults to False.
 
         Returns:
             list[MenuItem]: A list of MenuItem objects representing all menu items in the database.
@@ -118,7 +127,12 @@ class dbMenu:
 
         with self.db_connection:
             cursor = self.db_connection.cursor()
-            cursor.execute("SELECT * FROM menu")
+
+            if order_by_date:
+                cursor.execute("SELECT * FROM menu ORDER BY date")  
+            else: 
+                cursor.execute("SELECT * FROM menu")
+   
             dbMenu = cursor.fetchall()
 
             menu = []
