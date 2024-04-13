@@ -2,8 +2,8 @@ from datetime import datetime, timedelta
 
 def get_dates_in_between(start_date_str, end_date_str):
     # Parse the start and end dates into datetime objects
-    start_date = datetime.strptime(start_date_str, '%A, %d %B')
-    end_date = datetime.strptime(end_date_str, '%A, %d %B')
+    start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
 
     # Initialize a list to store the dates
     dates_list = []
@@ -11,13 +11,21 @@ def get_dates_in_between(start_date_str, end_date_str):
     # Iterate over the dates from start to end, inclusive
     current_date = start_date
     while current_date <= end_date:
-        dates_list.append(current_date.strftime('%A, %d %B'))
+        dates_list.append(current_date.strftime('%Y-%m-%d'))
         current_date += timedelta(days=1)
 
     return dates_list
 
-# Example usage:
-start_date_str = 'Monday, 16 April'
-end_date_str = 'Wednesday, 25 April'
-dates_in_between = get_dates_in_between(start_date_str, end_date_str)
-print(dates_in_between)
+def change_date_format(date_str):
+    # Parse the date string into a datetime object
+    date = datetime.strptime(date_str, '%Y-%m-%d')
+    
+    # Format the date as 'Day, DD Month'
+    formatted_date = date.strftime("%A, %d %B")
+
+    return formatted_date
+
+check = change_date_format('2022-01-01')  # 'Saturday, 01 January'
+print(check)
+
+

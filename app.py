@@ -33,12 +33,17 @@ def add_vegetarian_meals():
 def display_menu():
     menu_items = menu.get_menu()
     meals = []
+    dates = []
+
     for item in menu_items:
         meal = veg_meals.get_meal_by_id(item.meal_id)
         meals.append(meal)
+        dates.append(item.date)
     
-    menu_display = zip(menu_items, meals)
-    return render_template('menu.html', menu_display = menu_display)
+    formatted_date = [change_date_format(date) for date in dates]
+
+    menu_display = zip(menu_items, meals, formatted_date)
+    return render_template('menu.html', menu_display = menu_display, dates = dates)
 
 
 @app.route("/add_menu_item", methods=['GET','POST'])

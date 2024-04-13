@@ -22,34 +22,59 @@
             
               <input type="submit" value="Add meal to menu">
 
-              <div id="results"></div>
             </form>
             
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
             
+            <style>
+                .highlighted-date a {
+                  background-color: #ffc107 !important; /* Change the background color as desired */
+                  color: #000 !important; /* Change the text color as desired */
+                }
+            </style>
+
+              
             <script>
             document.addEventListener("DOMContentLoaded", function() {
-              var startDateInput = document.getElementById("startDate");
-              var endDateInput = document.getElementById("endDate");
-              var resultsDiv = $("#results");
+                var startDateInput = document.getElementById("startDate");
+                var endDateInput = document.getElementById("endDate");
+
+                   
+
+                // Define the beforeShowDay function
+                function highlightSelectedDates(date) {
+                    var dateStr = $.datepicker.formatDate('yy-mm-dd', date);
+                    // Define an array of dates you want to change the color of
+                    var selectedDates = {{ dates | tojson | safe }};
+                    
+                    console.log("Selected Dates:", selectedDates);
             
-              $(startDateInput).datepicker({
-                dateFormat: 'DD, d MM',
-                onSelect: function(selectedDate) {
-                  $(endDateInput).datepicker("option", "minDate", selectedDate);
+
+                    if (selectedDates.includes(dateStr)) {
+                        return [true, 'highlighted-date']; // 'highlighted-date' is a CSS class you can define
+                    }
+                    return [true, ''];
                 }
-              });
-            
-              $(endDateInput).datepicker({
-                dateFormat: 'DD, d MM',
+                
+                $(startDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
                 onSelect: function(selectedDate) {
-                  $(startDateInput).datepicker("option", "maxDate", selectedDate);
-                }
-              });
+                    $(endDateInput).datepicker("option", "minDate", selectedDate);
+                },
+                beforeShowDay: highlightSelectedDates // Reusing the function
+                });
+                
+                $(endDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(selectedDate) {
+                    $(startDateInput).datepicker("option", "maxDate", selectedDate);
+                },
+                beforeShowDay: highlightSelectedDates // Reusing the function
+                });
             });
-            </script>
-            
+        </script>
+                    
         </body>
 
         <table border="1">
@@ -57,9 +82,9 @@
                     <th>Date</th>
                     <th>Title</th>
                 </tr>
-                {% for menu_item, meal_card in menu_display %}
+                {% for menu_item, meal_card, formatted_date in menu_display %}
                 <tr>
-                    <td>{{menu_item.date}}</td>
+                    <td> {{formatted_date}}  </td>
                     <td><a href="/{{meal_card.title}}">{{meal_card.title}}</a></td>
                     <td> 
                         <form action="/delete_menu_item/{{menu_item.menu_id}}" method="post">
