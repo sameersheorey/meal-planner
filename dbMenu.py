@@ -37,7 +37,7 @@ class dbMenu:
             ''')
 
 
-    def add_random_meal(self, meal_cards: list[MealCard]) -> None:
+    def add_random_meal(self, meal_cards: list[MealCard], date: str) -> None:
         """Add a randomly selected meal from the provided list of MealCards to the weekly menu.
         
         Args:
@@ -46,7 +46,7 @@ class dbMenu:
 
         meal = random.choice(meal_cards)
 
-        newdate = datetime.datetime.now()
+        newdate = date
 
         with self.db_connection:
             try:                

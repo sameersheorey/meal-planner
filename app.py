@@ -3,6 +3,7 @@ from dbMealFolder import dbMealFolder
 from dbMenu import dbMenu
 from dbShoppingList import dbShoppingList
 from dbStoreCupboard import dbStoreCupboard
+from flask import request
 
 app = Flask(__name__)
 
@@ -39,10 +40,16 @@ def display_menu():
     return render_template('menu.html', menu_display = menu_display)
 
 
-@app.route("/add_menu_item", methods=['POST'])
+@app.route("/add_menu_item", methods=['GET','POST'])
 def add_menu_item():
+    if request.method == 'POST':
+        selected_start_date = request.form.get('startDate')
+        # selected_end_date = request.form.get('selectedEndDate')
+    print(selected_start_date)
+    print('hello')
     meals = veg_meals.get_all_meals()
-    menu.add_random_meal(meals)
+    # TODO: for statement selecting through all dates
+    menu.add_random_meal(meals, selected_start_date)
     return redirect(url_for('display_menu'))
 
 
@@ -65,6 +72,13 @@ def replace_menu_item(menu_id):
 def add_to_shopping(menu_id, meal_id):
     new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
     shopping_list.add_ingredients(new_ingredients, menu_id)
+    menu.toggle_added_to_shopping(menu_id)
+    return redirect(url_for('display_menu'))
+
+
+@app.route("/delete_from_shopping/<menu_id>", methods=['POST'])
+def delete_from_shopping(menu_id):
+    shopping_list.delete_ingredients_by_menu_id(menu_id)
     menu.toggle_added_to_shopping(menu_id)
     return redirect(url_for('display_menu'))
 

@@ -4,9 +4,59 @@
 {% block content %}
         <h1>Menu</h1>
 
-        <form action="{{ url_for('add_menu_item') }}" method="post">
-            <input type="submit" value="Add Meal To Menu">
-        </form>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Date Range Picker</title>
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        </head>
+
+        <body>
+
+            <form id="dateRangeForm" action="{{ url_for('add_menu_item') }}" method="post">
+              <label for="startDate">Start Date:</label>
+              <input type="text" id="startDate" name="startDate">
+            
+              <label for="endDate">End Date:</label>
+              <input type="text" id="endDate" name="endDate">
+            
+              <input type="submit" value="Add meal to menu">
+            </form>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              var startDateInput = document.getElementById("startDate");
+              var endDateInput = document.getElementById("endDate");
+            
+              $(startDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(selectedDate) {
+                  $(endDateInput).datepicker("option", "minDate", selectedDate);
+                  updateOutput();
+                }
+              });
+            
+              $(endDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(selectedDate) {
+                  $(startDateInput).datepicker("option", "maxDate", selectedDate);
+                  updateOutput();
+                }
+              });
+            
+              function updateOutput() {
+                var startDate = startDateInput.value;
+                var endDate = endDateInput.value;
+                console.log("Start Date: " + startDate);
+                console.log("End Date: " + endDate);
+              }
+            });
+            </script>
+            
+        </body>
 
         <table border="1">
                 <tr>
@@ -28,11 +78,13 @@
                         </form>
                     </td>
                     <td> 
-                        <!-- <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
-                        <input type="submit" value="Add ingredients to Shoppping">
-                        </form> -->
                         <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
                             <input type="submit" value="Add ingredients to Shopping" {% if menu_item.added_to_shopping == 1 %} disabled {% endif %}>
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/delete_from_shopping/{{menu_item.menu_id}}" method="post">
+                            <input type="submit" value="Delete ingredients from Shopping" {% if menu_item.added_to_shopping == 0 %} disabled {% endif %}>
                         </form>
                     </td>
                 </tr>
