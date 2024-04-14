@@ -56,11 +56,9 @@ def add_menu_item():
     dates = get_dates_in_between(selected_start_date, selected_end_date )
     
     for date in dates:
-        menu_item = menu.get_menu_item_by_date(date)
-        if menu_item is not None:
-            return render_template('repeated_date.html', menu_item = menu_item)
-        # TODO: if date already exists in database, ask user if they want to replace it,
-        # if yes, replace it (redirect to replace menu_item with menu_id related to that tag), if no, skip it
+        if menu.date_in_menu(date):
+            pass
+        # TODO: if date already exists in database, ask user if they want to replace it. If yes, replace it, if no, skip it
         else:
             menu.add_random_meal(meals, date)
     

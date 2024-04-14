@@ -88,6 +88,30 @@ class dbMenu:
             )
        
 
+    def date_in_menu(self, date: str) -> MealCard:
+        """Check a meal for a given date is in the menu.
+
+        Args:
+            date (str): The date of the menu to retrieve.
+            
+        Returns:
+            bool: True if a menu item exists for the given date, False otherwise.
+        """
+
+        with self.db_connection:
+            cursor = self.db_connection.cursor()
+            
+
+            cursor.execute("SELECT * FROM menu WHERE date = ?", [date])
+            
+            dbMenu = cursor.fetchall()
+
+            if dbMenu:
+                return True
+
+            else: 
+                return False
+
     def get_menu_item_by_date(self, date: str) -> MealCard:
         """Retrieve a menu from the database by its date.
 
