@@ -14,7 +14,7 @@ shopping_list = dbShoppingList('shopping_list.db')
 store_cupboard = dbStoreCupboard('store_cupboard.db')
 
 # Dummy items added to stock cupboard - note will add items twice in debug mode TODO: workaround for this
-store_cupboard.add_ingredients(['dummy 1', 'dummy 2', 'dummy 3'])
+store_cupboard.add_ingredients(store_cupboard_dummy)
 # print('hello')
 
 @app.route("/")
@@ -83,9 +83,21 @@ def replace_menu_item(menu_id):
 @app.route("/add_to_shopping/<menu_id>/<meal_id>", methods=['POST'])
 def add_to_shopping(menu_id, meal_id):
     new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
+    store_comparison_dict = store_cupboard.find_similar_ingredients(new_ingredients)
+    
+    print(store_comparison_dict)
+    print(new_ingredients)
+    for sublist in store_comparison_dict.values():
+        for item in sublist:
+            if item in new_ingredients:
+                new_ingredients.remove(item)
+    print(new_ingredients)
+    print("HELLO",store_comparison_dict)
+    #TODO: items to add are added. New url_template rendered where user can select which other items to add. Redirected to display menu.
     shopping_list.add_ingredients(new_ingredients, menu_id)
     menu.toggle_added_to_shopping(menu_id)
-    return redirect(url_for('display_menu'))
+    # store_comparison_dict = {'test':['a','b','c'],'test2':['d','e','f']}
+    return render_template('store_comparison.html', store_comparison_dict = store_comparison_dict)
 
 
 @app.route("/delete_from_shopping/<menu_id>", methods=['POST'])

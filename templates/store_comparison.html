@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+        <h1>Menu</h1>
+
+        <table border="1">
+                <tr>
+                    <th>Store Item</th>
+                    <th>Similar Ingredients</th>
+                </tr>
+                {% for key in store_comparison_dict %}
+                <tr>
+                    <td> {{key}}  </td>
+                    <td> {{store_comparison_dict[key]}}</td>
+                    <td> 
+                        <form action="/" method="post">
+                            <input type="submit" value="Add ingredients to Shopping">
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/" method="post">
+                            <input type="submit" value="Delete ingredients from Shopping">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}                
+            </table>
+        <a href="/menu">View Meal Folder</a>
+{% endblock %}
