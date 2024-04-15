@@ -85,19 +85,34 @@ def add_to_shopping(menu_id, meal_id):
     new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
     store_comparison_dict = store_cupboard.find_similar_ingredients(new_ingredients)
     
-    print(store_comparison_dict)
-    print(new_ingredients)
+    # print(store_comparison_dict)
+    # print(new_ingredients)
     for sublist in store_comparison_dict.values():
         for item in sublist:
             if item in new_ingredients:
                 new_ingredients.remove(item)
-    print(new_ingredients)
-    print("HELLO",store_comparison_dict)
+    # print(new_ingredients)
+    # print("HELLO",store_comparison_dict)
     #TODO: items to add are added. New url_template rendered where user can select which other items to add. Redirected to display menu.
     shopping_list.add_ingredients(new_ingredients, menu_id)
     menu.toggle_added_to_shopping(menu_id)
     # store_comparison_dict = {'test':['a','b','c'],'test2':['d','e','f']}
-    return render_template('store_comparison.html', store_comparison_dict = store_comparison_dict)
+    return render_template('store_comparison.html', store_comparison_dict = store_comparison_dict, menu_id = menu_id)
+
+
+@app.route("/add_to_shopping/compared_ingredients/<menu_id>", methods=['POST'])
+def add_compared_ingredients_to_shopping(menu_id):
+    add_anyway_ingredients = request.form.getlist("add_anyway")
+    add_anyway_ingredients = unpack_lists(add_anyway_ingredients)
+
+    custom_ingredients = request.form.getlist("customIngredient")
+    custom_ingredients = [ingredient for ingredient in custom_ingredients if ingredient.strip()]
+
+    ingredients_to_add = add_anyway_ingredients + custom_ingredients
+
+    shopping_list.add_ingredients(ingredients_to_add, menu_id)
+    # print(add_anyway_ingredients)
+    return redirect(url_for('display_menu'))
 
 
 @app.route("/delete_from_shopping/<menu_id>", methods=['POST'])
@@ -115,8 +130,25 @@ def display_shopping_list():
 
 @app.route("/store_cupboard")
 def display_store_cupboard():
-    ingredients = store_cupboard.get_ingredients_list()
+    ingredients = store_cupboard.get_ingredients()
     return render_template('store_cupboard.html', ingredients = ingredients)
+
+# TODO: finish below
+@app.route("/add_store_cupboard_item", methods=['POST'])
+def add_store_cupboard_item():
+    ingredient = request.form.getlist("add_ingredient")
+    print(ingredient)
+    store_cupboard.add_ingredients(ingredient)
+    return redirect(url_for('display_store_cupboard'))
+
+
+@app.route("/delete_store_cupboard_items", methods=['POST'])
+def delete_store_cupboard_items():
+    ingredient_ids = request.form.getlist("delete_ingredients")
+    print(ingredient_ids)
+    for id in ingredient_ids:
+        store_cupboard.delete_ingredients_by_id(id)
+    return redirect(url_for('display_store_cupboard'))
 
 
 @app.route('/<filename>')

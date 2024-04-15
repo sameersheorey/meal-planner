@@ -3,11 +3,33 @@
 
 {% block content %}
         <h1>Store Cupboard</h1>
-            <ul>
-            {% for ingredient in ingredients %}
-                <li>{{ingredient}}</li>
+
+        <form action="/add_store_cupboard_item" method="post">
+            <input type="text" name="add_ingredient" placeholder="Store Cupboard Ingredient">
+            <button type="submit">Add Ingredient</button>
+        </form>
+        
+        <form action="/delete_store_cupboard_items" method="post">
+            <table border="1">
+                <tr>
+                    <th>Ingredient</th>
+                    <td><button type="submit">Delete Selected Items</button></td>
+                </tr>
+                {% for ingredient in ingredients %}
+                <tr>
+                    <td>{{ingredient.ingredient}}</td>
+                    
+                        <td class="button-container">
+                            <label class="checkbox">
+                                <input type="checkbox" name="delete_ingredients" value="{{ingredient.id}}">
+                                </label>
+                        </td>
+                </tr>
+        </form>
+
             {% endfor %}
-            </ul>
+        </table>
+
         <a href="/">View Meal Folder</a>
         <a href="/menu">View Menu</a>
         <a href="/shopping_list">View Shopping List</a>

@@ -65,3 +65,22 @@ store_cupboard_dummy = ['For the pasta and sauce:', '1 tbsp olive oil', '1 brown
                   '4 spring onions, thinly sliced', 'jasmine rice, for serving', '320g pack ready-rolled puff pastry', '2 tsp milk', '1 leek', 
                   '1 large roasted beetroot', '4 tbsp soft cheese', '200g goat cheese', '16g Marmite', '50g agave nectar', '2 tsp cornflour', 
                   '30ml mirin', '560g tofu', '100g roasted peanuts', '60ml soy sauce']
+
+
+def unpack_lists(original_list: list[str]) -> list[str]:
+    """
+    Unpacks a list of strings containing lists into a single list of strings.
+
+    Args:
+        original_list (list[str]): A list of strings, where each string represents a list.
+
+    Returns:
+        list[str]: A list of strings, where each string is an item from the original lists.
+    """
+    unpacked_list = []
+    for item in original_list:
+        item = item.strip("[]'")
+        items = [i.strip() for i in item.split("', '")]
+        unpacked_list.extend(items)
+
+    return unpacked_list

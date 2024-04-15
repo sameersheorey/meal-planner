@@ -1,5 +1,5 @@
 import sqlite3
-
+from IngredientItem import IngredientItem
 
 class dbIngredients:
     """A class to manage a database of ingredients.
@@ -45,20 +45,49 @@ class dbIngredients:
                 )
           
 
+    def get_ingredients(self):
+        """Retrieve all ingredients from the ingredient list database.
+
+        Returns:
+            list[IngredientItem]: A list of IngredientItem objects representing all ingredients in the ingredient list database.
+        """     
+        with self.db_connection:
+            cursor = self.db_connection.cursor()
+            cursor.execute("SELECT * FROM ingredients_table")
+            dbIngredients = cursor.fetchall()
+
+            ingredient_items = []
+            for row in dbIngredients:
+                ingredient_item = IngredientItem(row[0], row[1], row[2])
+                ingredient_items.append(ingredient_item)
+
+        return ingredient_items
+    
+
     def get_ingredients_list(self):
         """Retrieve all ingredients from the ingredient list database.
 
         Returns:
             list[str]: A list of ingredients representing all ingredients in the ingredient list database.
         """        
-        with self.db_connection:
-            cursor = self.db_connection.cursor()
-            cursor.execute("SELECT * FROM ingredients_table")
-            dbIngredients = cursor.fetchall()
+        ingredient_items = self.get_ingredients()
 
-            ingredients = []
-            for ingredient_list_item in dbIngredients:
-                ingredients.append(ingredient_list_item[1])
+        ingredients = []
+        for ingredient_item in ingredient_items:
+            ingredients.append(ingredient_item.ingredient)
 
         return ingredients
+    
+
+    def delete_ingredients_by_id(self, id: int) -> None:
+        """Delete all ingredients from ingredients_list database with a particular id.
+
+        Args:
+            menu_id (int): ID of the meal.
+        """
+        with self.db_connection:
+            self.db_connection.execute(
+                'DELETE FROM ingredients_table WHERE id = ?',
+                (id,)
+                )
     

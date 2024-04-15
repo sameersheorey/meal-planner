@@ -1,30 +1,62 @@
 {% extends "layout.html" %}
-{% block title %}Menu{% endblock %}
+{% block title %}Store Comparison{% endblock %}
 
 {% block content %}
-        <h1>Menu</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Selection</title>
 
-        <table border="1">
-                <tr>
-                    <th>Store Item</th>
-                    <th>Similar Ingredients</th>
-                </tr>
-                {% for key in store_comparison_dict %}
-                <tr>
-                    <td> {{key}}  </td>
-                    <td> {{store_comparison_dict[key]}}</td>
-                    <td> 
-                        <form action="/" method="post">
-                            <input type="submit" value="Add ingredients to Shopping">
-                        </form>
-                    </td>
-                    <td> 
-                        <form action="/" method="post">
-                            <input type="submit" value="Delete ingredients from Shopping">
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}                
-            </table>
-        <a href="/menu">View Meal Folder</a>
+    <script>
+        window.onload = function() {
+            var checkbox = document.querySelectorAll('input[type="checkbox"]');
+            var textInputs = document.querySelectorAll('input[type="text"]');
+            
+            checkbox.forEach(function(cb) {
+                cb.addEventListener('change', function() {
+                    var correspondingInput = this.parentNode.parentNode.nextElementSibling.querySelector('input[type="text"]');
+                    correspondingInput.disabled = this.checked;
+                });
+            });
+            
+            textInputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    var correspondingCheckbox = this.parentNode.previousElementSibling.querySelector('input[type="checkbox"]');
+                    correspondingCheckbox.disabled = this.value.length > 0;
+                });
+            });
+        };
+    </script>
+
+
+    </head>
+    <body>
+    
+        <form id="ingredientForm" action="/add_to_shopping/compared_ingredients/{{menu_id}}" method="POST">
+            <table border="1">
+            <tr>
+            <th>Store Item</th>
+            <th>Similar Ingredients</th>
+            <th>Add Anyway</th>
+            <th>Add Custom Ingredient</th>
+            </tr>
+            {% for store_item, similar_ingredients in store_comparison_dict.items() %}
+            <tr>
+                <td>{{ store_item }}</td>
+                <td>{{similar_ingredients}}</td>
+                <td class="button-container">
+                    <label class="checkbox">
+                        <input type="checkbox" name="add_anyway" value="{{ similar_ingredients }}"/>
+                      </label>
+                </td>
+                <td>
+                <input type="text" name="customIngredient" placeholder="Custom Ingredient">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Submit</button>
+        </form>
+        
+    </body>
 {% endblock %}
