@@ -29,7 +29,7 @@
               <label for="endDate">End Date:</label>
               <input type="text" id="endDate" name="endDate">
             
-              <input type="submit" value="Add meal to menu">
+              <input type="submit" value="Add meal(s) to menu">
 
             </form>
             
@@ -49,19 +49,15 @@
                 var startDateInput = document.getElementById("startDate");
                 var endDateInput = document.getElementById("endDate");
 
-                   
-
-                // Define the beforeShowDay function
                 function highlightSelectedDates(date) {
                     var dateStr = $.datepicker.formatDate('yy-mm-dd', date);
-                    // Define an array of dates you want to change the color of
                     var selectedDates = {{ dates | tojson | safe }};
                     
                     console.log("Selected Dates:", selectedDates);
             
 
                     if (selectedDates.includes(dateStr)) {
-                        return [true, 'highlighted-date']; // 'highlighted-date' is a CSS class you can define
+                        return [true, 'highlighted-date']; 
                     }
                     return [true, ''];
                 }
@@ -70,16 +66,22 @@
                 dateFormat: 'yy-mm-dd',
                 onSelect: function(selectedDate) {
                     $(endDateInput).datepicker("option", "minDate", selectedDate);
+                    if (!endDateInput.value) { 
+                        endDateInput.value = selectedDate; 
+                    }
                 },
-                beforeShowDay: highlightSelectedDates // Reusing the function
+                beforeShowDay: highlightSelectedDates 
                 });
                 
                 $(endDateInput).datepicker({
                 dateFormat: 'yy-mm-dd',
                 onSelect: function(selectedDate) {
                     $(startDateInput).datepicker("option", "maxDate", selectedDate);
+                    if (!startDateInput.value) { 
+                        startDateInput.value = selectedDate; 
+                    } 
                 },
-                beforeShowDay: highlightSelectedDates // Reusing the function
+                beforeShowDay: highlightSelectedDates
                 });
             });
         </script>
