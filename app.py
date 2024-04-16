@@ -15,7 +15,6 @@ store_cupboard = dbStoreCupboard('store_cupboard.db')
 
 # Dummy items added to stock cupboard - note will add items twice in debug mode TODO: workaround for this
 store_cupboard.add_ingredients(store_cupboard_dummy)
-# print('hello')
 
 @app.route("/")
 def display_all_meals():
@@ -85,18 +84,13 @@ def add_to_shopping(menu_id, meal_id):
     new_ingredients = veg_meals.get_meal_by_id(meal_id).ingredients
     store_comparison_dict = store_cupboard.find_similar_ingredients(new_ingredients)
     
-    # print(store_comparison_dict)
-    # print(new_ingredients)
     for sublist in store_comparison_dict.values():
         for item in sublist:
             if item in new_ingredients:
                 new_ingredients.remove(item)
-    # print(new_ingredients)
-    # print("HELLO",store_comparison_dict)
-    #TODO: items to add are added. New url_template rendered where user can select which other items to add. Redirected to display menu.
+
     shopping_list.add_ingredients(new_ingredients, menu_id)
     menu.toggle_added_to_shopping(menu_id)
-    # store_comparison_dict = {'test':['a','b','c'],'test2':['d','e','f']}
     return render_template('store_comparison.html', store_comparison_dict = store_comparison_dict, menu_id = menu_id)
 
 
@@ -111,7 +105,6 @@ def add_compared_ingredients_to_shopping(menu_id):
     ingredients_to_add = add_anyway_ingredients + custom_ingredients
 
     shopping_list.add_ingredients(ingredients_to_add, menu_id)
-    # print(add_anyway_ingredients)
     return redirect(url_for('display_menu'))
 
 
@@ -133,7 +126,7 @@ def display_store_cupboard():
     ingredients = store_cupboard.get_ingredients()
     return render_template('store_cupboard.html', ingredients = ingredients)
 
-# TODO: finish below
+
 @app.route("/add_store_cupboard_item", methods=['POST'])
 def add_store_cupboard_item():
     ingredient = request.form.getlist("add_ingredient")

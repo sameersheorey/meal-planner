@@ -2,18 +2,33 @@
 {% block title %}Store Cupboard{% endblock %}
 
 {% block content %}
+        <style>
+        /* Smaller font size for table content */
+        table {
+            font-size: 14px; /* Adjust font size as needed */
+        }
+        </style>   
+
         <h1>Store Cupboard</h1>
 
+        <hr style="height:0px;" />
+
+        <a href="/" class="boxed-link">View Meal Folder</a>
+        <a href="/menu" class="boxed-link">View Menu</a>
+        <a href="/shopping_list" class="boxed-link">View Shopping List</a>
+
+        <hr style="height:0px;" />
+
         <form action="/add_store_cupboard_item" method="post">
-            <input type="text" name="add_ingredient" placeholder="Store Cupboard Ingredient">
-            <button type="submit">Add Ingredient</button>
+            <input type="text" name="add_ingredient" placeholder="Ingredient" style="border: 1px solid lightgray; padding: 0px; width: fit-content; margin: 0 auto;">
+            <input type="submit" value = "Add to Store Cupbaord">
         </form>
         
         <form action="/delete_store_cupboard_items" method="post">
             <table border="1">
                 <tr>
                     <th>Ingredient</th>
-                    <td><button type="submit">Delete Selected Items</button></td>
+                    <td><input type="submit" value="Delete Selected Items"></td>
                 </tr>
                 {% for ingredient in ingredients %}
                 <tr>
@@ -30,7 +45,5 @@
             {% endfor %}
         </table>
 
-        <a href="/">View Meal Folder</a>
-        <a href="/menu">View Menu</a>
-        <a href="/shopping_list">View Shopping List</a>
+
 {% endblock %}

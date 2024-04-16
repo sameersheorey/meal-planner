@@ -3,12 +3,19 @@
 
 {% block content %}
         <h1>Shopping List</h1>
+
+        <hr style="height:0px;" />
+
+        <a href="/" class="boxed-link">View Meal Folder</a>
+        <a href="/menu" class="boxed-link">View Menu</a>
+        <a href="/store_cupboard" class="boxed-link">View Store Cupboard</a>
+
+        <hr style="height:0px;" />
+
             <ul>
             {% for ingredient in ingredients %}
                 <li>{{ingredient}}</li>
             {% endfor %}
             </ul>
-        <a href="/">View Meal Folder</a>
-        <a href="/menu">View Menu</a>
-        <a href="/store_cupboard">View Store Cupboard</a>
+
 {% endblock %}

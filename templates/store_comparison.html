@@ -2,7 +2,13 @@
 {% block title %}Store Comparison{% endblock %}
 
 {% block content %}
-<head>
+
+    <h3>The following ingredients appear to already be in your store cupboard:</h3>
+
+    <hr style="height:0px; visibility: hidden;" />
+
+    <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingredient Selection</title>
@@ -35,7 +41,7 @@
         <form id="ingredientForm" action="/add_to_shopping/compared_ingredients/{{menu_id}}" method="POST">
             <table border="1">
             <tr>
-            <th>Store Item</th>
+            <th>Store Cupboard Item</th>
             <th>Similar Ingredients</th>
             <th>Add Anyway</th>
             <th>Add Custom Ingredient</th>
@@ -55,6 +61,7 @@
             </tr>
             {% endfor %}
         </table>
+        <hr style="height:0px; visibility: hidden;" />
         <button type="submit">Submit</button>
         </form>
         
