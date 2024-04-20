@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+        <h1>Menu</h1>
+
+        <hr style="height:0px" />
+
+        <a href="/" class="boxed-link">View Meal Folder</a>
+        <a href="/shopping_list" class="boxed-link">View Shopping List</a>
+        <a href="/store_cupboard" class="boxed-link">View Store Cupboard</a>
+
+        <hr style="height:0px;" />
+
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Date Range Picker</title>
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        </head>
+
+        <body>
+
+            <form id="dateRangeForm" action="{{ url_for('add_menu_item') }}" method="post">
+              <label for="startDate">Start Date:</label>
+              <input type="text" id="startDate" name="startDate">
+            
+              <label for="endDate">End Date:</label>
+              <input type="text" id="endDate" name="endDate">
+            
+              <input type="submit"  id="addMealButton" value="Add meal(s) to menu">
+
+            </form>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+            
+            <style>
+                .highlighted-date a {
+                  background-color: #ffc107 !important; /* Change the background color as desired */
+                  color: #000 !important; /* Change the text color as desired */
+                }
+            </style>
+
+              
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var startDateInput = document.getElementById("startDate");
+                    var endDateInput = document.getElementById("endDate");
+
+                function highlightSelectedDates(date) {
+                    var dateStr = $.datepicker.formatDate('yy-mm-dd', date);
+                    var selectedDates = {{ dates | tojson | safe }};
+                                
+                    if (selectedDates.includes(dateStr)) {
+                        return [true, 'highlighted-date']; 
+                    }
+                    return [true, ''];
+                }
+                
+                $(startDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(selectedDate) {
+                    $(endDateInput).datepicker("option", "minDate", selectedDate);
+                    if (!endDateInput.value) { 
+                        endDateInput.value = selectedDate; 
+                    }
+                    checkDatesFilled();
+                },
+                beforeShowDay: highlightSelectedDates 
+                });
+                
+                $(endDateInput).datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(selectedDate) {
+                    $(startDateInput).datepicker("option", "maxDate", selectedDate);
+                    if (!startDateInput.value) { 
+                        startDateInput.value = selectedDate; 
+                    } 
+                    checkDatesFilled();
+                },
+                beforeShowDay: highlightSelectedDates
+
+                }); 
+                
+                function checkDatesFilled() {
+                    var startDate = $("#startDate").datepicker("getDate");
+                    var endDate = $("#endDate").datepicker("getDate");
+
+                    if (startDate && endDate) {
+                        $("#addMealButton").prop("disabled", false);
+                    } else {
+                        $("#addMealButton").prop("disabled", true);
+                    }
+                }
+
+                checkDatesFilled();
+           
+            });
+
+            
+        </script>
+                    
+        </body>
+
+        <table border="1">
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                </tr>
+                {% for menu_item, meal_card, formatted_date in menu_display %}
+                <tr>
+                    <td> {{formatted_date}}  </td>
+                    <td>
+                        <a href="/{{meal_card.title}}">{{meal_card.title}}</a>
+                    </td>
+                    <td>
+                        <form action="/delete_menu_item/{{menu_item.menu_id}}" method="post">
+                            <input type="submit" value="Delete Meal">
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/replace_menu_item/{{menu_item.menu_id}}" method="post">
+                        <input type="submit" value="Replace Meal">
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/add_to_shopping/{{menu_item.menu_id}}/{{meal_card.id}}" method="post">
+                            <input type="submit" value="Add ingredients to Shopping" {% if menu_item.added_to_shopping == 1 %} disabled {% endif %}>
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/delete_from_shopping/{{menu_item.menu_id}}" method="post">
+                            <input type="submit" value="Delete ingredients from Shopping" {% if menu_item.added_to_shopping == 0 %} disabled {% endif %}>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}                
+            </table>
+
+{% endblock %}

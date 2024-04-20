@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Meals{% endblock %}
+
+{% block content %}
+        <h1>Meals</h1>
+
+        <hr style="height:0px;" />
+
+        <a href="/menu" class="boxed-link">View Menu</a>
+        <a href="/shopping_list" class="boxed-link">View Shopping List</a>
+        <a href="/store_cupboard" class="boxed-link">View Store Cupboard</a>
+
+        <hr style="height:0px;" />
+
+        <form action="{{ url_for('add_vegetarian_meals') }}" method="post">
+            <input type="submit" value="Add New Vegetarian Meals">
+        </form>
+
+        <ul>
+                {% for meal in meals %}
+                <li> <a href="/{{meal.title}}">{{meal.title}}</a></li>
+                {% endfor %}
+        </ul>
+
+{% endblock %}

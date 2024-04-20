@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}Store Comparison{% endblock %}
+
+{% block content %}
+
+    <h3>The following ingredients appear to already be in your store cupboard:</h3>
+
+    <hr style="height:0px; visibility: hidden;" />
+
+    <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Selection</title>
+
+    <script>
+        window.onload = function() {
+            var checkbox = document.querySelectorAll('input[type="checkbox"]');
+            var textInputs = document.querySelectorAll('input[type="text"]');
+            
+            checkbox.forEach(function(cb) {
+                cb.addEventListener('change', function() {
+                    var correspondingInput = this.parentNode.parentNode.nextElementSibling.querySelector('input[type="text"]');
+                    correspondingInput.disabled = this.checked;
+                });
+            });
+            
+            textInputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    var correspondingCheckbox = this.parentNode.previousElementSibling.querySelector('input[type="checkbox"]');
+                    correspondingCheckbox.disabled = this.value.length > 0;
+                });
+            });
+        };
+    </script>
+
+
+    </head>
+    <body>
+    
+        <form id="ingredientForm" action="/add_to_shopping/compared_ingredients/{{menu_id}}" method="POST">
+            <table border="1">
+            <tr>
+            <th>Store Cupboard Item</th>
+            <th>Similar Ingredients</th>
+            <th>Add Anyway</th>
+            <th>Add Custom Ingredient</th>
+            </tr>
+            {% for store_item, similar_ingredients in store_comparison_dict.items() %}
+            <tr>
+                <td>{{ store_item }}</td>
+                <td>{{similar_ingredients}}</td>
+                <td class="button-container">
+                    <label class="checkbox">
+                        <input type="checkbox" name="add_anyway" value="{{ similar_ingredients }}"/>
+                      </label>
+                </td>
+                <td>
+                <input type="text" name="customIngredient" placeholder="Custom Ingredient">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr style="height:0px; visibility: hidden;" />
+        <button type="submit">Submit</button>
+        </form>
+        
+    </body>
+{% endblock %}

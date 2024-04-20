@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Store Cupboard{% endblock %}
+
+{% block content %}
+        <style>
+        /* Smaller font size for table content */
+        table {
+            font-size: 14px; /* Adjust font size as needed */
+        }
+        </style>   
+
+        <h1>Store Cupboard</h1>
+
+        <hr style="height:0px;" />
+
+        <a href="/" class="boxed-link">View Meal Folder</a>
+        <a href="/menu" class="boxed-link">View Menu</a>
+        <a href="/shopping_list" class="boxed-link">View Shopping List</a>
+
+        <hr style="height:0px;" />
+
+        <form action="/add_store_cupboard_item" method="post">
+            <input type="text" name="add_ingredient" placeholder="Ingredient" style="border: 1px solid lightgray; padding: 0px; width: fit-content; margin: 0 auto;">
+            <input type="submit" value = "Add to Store Cupbaord">
+        </form>
+        
+        <form action="/delete_store_cupboard_items" method="post">
+            <table border="1">
+                <tr>
+                    <th>Ingredient</th>
+                    <td><input type="submit" value="Delete Selected Items"></td>
+                </tr>
+                {% for ingredient in ingredients %}
+                <tr>
+                    <td>{{ingredient.ingredient}}</td>
+                    
+                        <td class="button-container">
+                            <label class="checkbox">
+                                <input type="checkbox" name="delete_ingredients" value="{{ingredient.id}}">
+                                </label>
+                        </td>
+                </tr>
+        </form>
+
+            {% endfor %}
+        </table>
+
+
+{% endblock %}
