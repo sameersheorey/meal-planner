@@ -18,7 +18,7 @@ class dbIngredients:
         self.create_table()
 
 
-    def create_table(self):
+    def create_table(self) -> None:
         """Create the 'Ingredients' table if it does not exist."""
         with self.db_connection:
             self.db_connection.execute('''
@@ -45,7 +45,7 @@ class dbIngredients:
                 )
           
 
-    def get_ingredients(self):
+    def get_ingredients(self) -> list[IngredientItem]:
         """Retrieve all ingredients from the ingredient list database.
 
         Returns:
@@ -64,7 +64,7 @@ class dbIngredients:
         return ingredient_items
     
 
-    def get_ingredients_list(self):
+    def get_ingredients_list(self) -> list[str]:
         """Retrieve all ingredients from the ingredient list database.
 
         Returns:

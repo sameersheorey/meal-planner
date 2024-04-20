@@ -22,7 +22,7 @@ class dbMealFolder:
         self.create_table()
 
 
-    def create_table(self):
+    def create_table(self) -> None:
         """Create the 'meal_cards' table if it does not exist."""
         
         with self.db_connection:
@@ -73,7 +73,6 @@ class dbMealFolder:
             if filter is None or (filter.casefold() in cats.casefold()):
                 with self.db_connection:
                     try:
-                        # Convert ingredients list to a JSON string
                         ingredients_str = json.dumps(ingredients)
                         
                         self.db_connection.execute(
@@ -83,19 +82,15 @@ class dbMealFolder:
                     except sqlite3.IntegrityError:
                         raise ValueError('Duplicate meal')
 
-            # Once added move the files in the mealData folder to templates folder
-
             try:
                 shutil.move(os.path.join('new_meals', filename), 'templates/saved_meals')
             except shutil.Error:
-                # print("Destination path already exists, overwrite it")
-                # shutil.move(os.path.join('mealData', filename), 'templates', copy_function=shutil.copy2)
                 pass
             except Exception as e:
                 print(f"Error moving {filename} to templates folder: {e}")
 
 
-    def get_all_meals(self):
+    def get_all_meals(self) -> list[MealCard]:
         """Retrieve all meal cards from the database.
 
         Returns:
@@ -109,9 +104,7 @@ class dbMealFolder:
             meals = []
 
             for row in dbMeals:
-                # Parse ingredients string into a Python list
                 ingredients = json.loads(row[5])
-
                 meal = MealCard(row[0], row[1], row[2], row[3], row[4], ingredients)
                 meals.append(meal)
 
@@ -134,9 +127,7 @@ class dbMealFolder:
             dbMeals = cursor.fetchall()
 
             for row in dbMeals:
-                # Parse ingredients string into a Python list
                 ingredients = json.loads(row[5])
-
                 meal = MealCard(row[0], row[1], row[2], row[3], row[4], ingredients)
 
         return meal

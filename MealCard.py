@@ -9,9 +9,14 @@ class MealCard:
         cats (str): Categories of the meal.
         ingredients (list[str]): List of ingredients for the meal.
     """
-    def __init__(self, meal_id: int, title: str, rating: str, 
-                 metadata: str, cats: str, 
-                 ingredients: list[str]) -> None:
+    def __init__(self,
+                 meal_id: int, 
+                 title: str, 
+                 rating: str, 
+                 metadata: str, 
+                 cats: str, 
+                 ingredients: list[str]
+                 ) -> None:
         """Initialize the MealCard object."""
         
         self.id = meal_id

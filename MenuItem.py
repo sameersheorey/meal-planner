@@ -5,6 +5,7 @@ class MenuItem:
         menu_id (int): The ID of the menu.
         date (str): The date of the menu item.
         meal_id (int): The ID of the meal.
+        added_to_shopping: int: 0 if the meal is not added to the shopping list, 1 if it is.
     """
     
     def __init__(self, menu_id: int, date: str, meal_id: int, added_to_shopping: int) -> None:

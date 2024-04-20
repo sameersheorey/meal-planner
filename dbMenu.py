@@ -23,7 +23,7 @@ class dbMenu:
         self.create_table()
 
 
-    def create_table(self):
+    def create_table(self) -> None:
         """Create the 'menu' table if it does not exist."""
 
         with self.db_connection:
@@ -88,7 +88,7 @@ class dbMenu:
             )
        
 
-    def date_in_menu(self, date: str) -> MealCard:
+    def date_in_menu(self, date: str) -> bool:
         """Check a meal for a given date is in the menu.
 
         Args:

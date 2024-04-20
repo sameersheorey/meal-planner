@@ -160,6 +160,9 @@ cython_debug/
 #.idea/
 
 templates/saved_meals/*
+new_meals/*
+!new_meals/.gitkeep
 !templates/saved_meals/.gitkeep
  
 *.DS_Store
+*.db
