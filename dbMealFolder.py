@@ -50,7 +50,7 @@ class dbMealFolder:
 
         for file in os.listdir('new_meals'):
             filename = os.fsdecode(file)
-            if filename == '.DS_Store':
+            if filename == '.DS_Store' or filename == '.gitkeep':
                 continue
 
             with open(f'new_meals/{filename}', 'r', encoding='utf-8') as file:

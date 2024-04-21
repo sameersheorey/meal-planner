@@ -22,9 +22,9 @@ def display_all_meals():
     return render_template('home.html', meals = meals)
 
 
-@app.route("/add_vegetarian_meals", methods=['POST'])
+@app.route("/add_meals", methods=['POST'])
 def add_vegetarian_meals():
-    veg_meals.add_all("vegetarian")
+    veg_meals.add_all()
     return redirect(url_for('display_all_meals'))
 
 
